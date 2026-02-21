@@ -624,16 +624,10 @@ function initRequestsForm() {
         request: request.trim(),
         timestamp: new Date().toISOString(),
       });
-      const resp = await fetch(`${APPS_SCRIPT_URL}?${params.toString()}`);
-      const data = await resp.json();
-
-      if (data.ok) {
-        feedback.textContent = '✓ Request submitted! We\'ve got you covered.';
-        feedback.className = 'requests-feedback requests-feedback--success';
-        form.reset();
-      } else {
-        throw new Error(data.error || 'Unknown error');
-      }
+      await fetch(`${APPS_SCRIPT_URL}?${params.toString()}`, { mode: 'no-cors' });
+      feedback.textContent = '✓ Request submitted! We\'ve got you covered.';
+      feedback.className = 'requests-feedback requests-feedback--success';
+      form.reset();
     } catch (err) {
       const detail = err instanceof Error ? err.message : String(err);
       feedback.textContent = `✗ Something went wrong: ${detail}`;

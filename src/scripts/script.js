@@ -632,8 +632,9 @@ function initRequestsForm() {
       } else {
         throw new Error(data.error || 'Unknown error');
       }
-    } catch {
-      feedback.textContent = '✗ Something went wrong — try again or text Michael.';
+    } catch (err) {
+      const detail = err instanceof Error ? err.message : String(err);
+      feedback.textContent = `✗ Something went wrong: ${detail}`;
       feedback.className = 'requests-feedback requests-feedback--error';
     } finally {
       feedback.hidden = false;

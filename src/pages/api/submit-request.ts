@@ -24,21 +24,32 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
-  const sheetResp = await fetch(webhookUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      name: name.trim(),
-      request: requestText.trim(),
-      timestamp: new Date().toISOString(),
-    }),
-  });
-
-  if (!sheetResp.ok) {
-    return new Response(JSON.stringify({ error: 'Failed to write to sheet' }), {
+  let sheetResp: Response;
+  try {
+    sheetResp = await fetch(webhookUrl, {
+      method: 'POST',
+      redirect: 'follow',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name.trim(),
+        request: requestText.trim(),
+        timestamp: new Date().toISOString(),
+      }),
+    });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    return new Response(JSON.stringify({ error: 'Could not reach Google Sheets', detail: msg }), {
       status: 502,
       headers: { 'Content-Type': 'application/json' },
     });
+  }
+
+  if (!sheetResp.ok) {
+    const body = await sheetResp.text().catch(() => '');
+    return new Response(
+      JSON.stringify({ error: 'Google Sheets returned an error', status: sheetResp.status, detail: body }),
+      { status: 502, headers: { 'Content-Type': 'application/json' } },
+    );
   }
 
   return new Response(JSON.stringify({ ok: true }), {

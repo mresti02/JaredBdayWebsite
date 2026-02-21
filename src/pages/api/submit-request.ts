@@ -1,15 +1,9 @@
 import type { APIRoute } from 'astro';
 
-export const POST: APIRoute = async ({ request, locals }) => {
-  // Cloudflare Workers env is surfaced via locals.runtime.env
-  const webhookUrl = (locals as any).runtime?.env?.GOOGLE_SHEETS_WEBHOOK_URL as string | undefined;
+const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbx2Wh85cb3dWdQOV5iU3OOA31emxdE_QE8AT_NtFIdLVFhwn6k3_nsjg-mpLddmt_x3/exec';
 
-  if (!webhookUrl) {
-    return new Response(JSON.stringify({ error: 'Service not configured' }), {
-      status: 503,
-      headers: { 'Content-Type': 'application/json' },
-    });
-  }
+export const POST: APIRoute = async ({ request }) => {
+  const webhookUrl = WEBHOOK_URL;
 
   let body: { name?: string; request?: string };
   try {

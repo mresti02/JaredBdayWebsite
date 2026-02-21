@@ -1013,11 +1013,11 @@ ul { list-style: none; }
 }
 .photo-strip-scroll {
   display: flex;
+  justify-content: center;
   gap: 16px;
   overflow-x: auto;
-  padding: 0 32px 12px;
+  padding: 0 32px;
   scrollbar-width: none;
-  animation: none;
 }
 .photo-strip-scroll::-webkit-scrollbar { display: none; }
 .strip-photo {

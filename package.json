@@ -1,0 +1,11 @@
+{
+  "name": "jared-birthday-website",
+  "version": "1.0.0",
+  "description": "A creative birthday website for Jared",
+  "scripts": {
+    "start": "npx serve .",
+    "dev": "npx live-server --port=3000 --open=index.html"
+  },
+  "keywords": ["birthday", "website", "celebration"],
+  "license": "MIT"
+}

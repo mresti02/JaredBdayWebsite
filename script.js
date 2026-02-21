@@ -1,351 +1,607 @@
-/* ============================================
-   JARED'S BIRTHDAY WEBSITE - INTERACTIVE JS
-   ============================================ */
+/* ================================================================
+   JARED'S 30TH BIRTHDAY PARTY — PUERTO VALLARTA 2026
+   script.js
+   ================================================================ */
 
-'use strict';
-
-/* ─── Confetti Engine ──────────────────────────────────────────────── */
-
-const confettiCanvas = document.getElementById('confetti-canvas');
-const ctx = confettiCanvas.getContext('2d');
-let confettiParticles = [];
-let confettiAnimating = false;
-let confettiTimeout = null;
-
-function resizeCanvas() {
-  confettiCanvas.width = window.innerWidth;
-  confettiCanvas.height = window.innerHeight;
-}
-
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-const CONFETTI_COLORS = [
-  '#6C63FF', '#FF6B9D', '#FFD93D', '#6BCB77',
-  '#4D96FF', '#FF6B1A', '#C77DFF', '#48CAE4',
+// ── Schedule Data ─────────────────────────────────────────────
+const SCHEDULE = [
+  {
+    date: 'Thursday, March 5',
+    subtitle: 'Arrival Day',
+    emoji: '✈️',
+    events: [
+      {
+        id: 'mar5-snacks',
+        time: '5:00 PM',
+        title: 'Welcome Snacks',
+        icon: '🧃',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: 'Drop your bags, pop something cold, and take a breath. You made it. Vacation starts NOW.',
+        dtStart: '20260305T230000Z',
+        dtEnd: '20260306T000000Z',
+        highlight: false,
+      },
+      {
+        id: 'mar5-dinner',
+        time: '7:00 PM',
+        title: 'Welcome Dinner',
+        icon: '🍽️',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: 'First dinner of the week, all 16 of us, together. Welcome to the group trip of the century.',
+        dtStart: '20260306T010000Z',
+        dtEnd: '20260306T030000Z',
+        highlight: false,
+      },
+    ],
+  },
+  {
+    date: 'Friday, March 6',
+    subtitle: 'Birthday Dinner Day',
+    emoji: '👑',
+    events: [
+      {
+        id: 'mar6-breakfast',
+        time: '10:00 AM',
+        title: 'Breakfast',
+        icon: '🥐',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: 'Morning fuel at the villa. Ease into it.',
+        dtStart: '20260306T160000Z',
+        dtEnd: '20260306T180000Z',
+        highlight: false,
+      },
+      {
+        id: 'mar6-lunch',
+        time: '1:00 PM',
+        title: 'Lunch',
+        icon: '🥗',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: 'A light poolside lunch to restore your energy before the evening.',
+        dtStart: '20260306T190000Z',
+        dtEnd: '20260306T210000Z',
+        highlight: false,
+      },
+      {
+        id: 'mar6-dinner',
+        time: '7:00 PM',
+        title: "Jared's Birthday Dinner — Bob Wigs Required",
+        icon: '💅',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: "The main event. Bob wigs. Full look. Maximum drama. Don't you dare show up without the wig.",
+        dtStart: '20260307T010000Z',
+        dtEnd: '20260307T040000Z',
+        highlight: true,
+      },
+      {
+        id: 'mar6-out',
+        time: 'Late Night',
+        title: 'Go Out in Puerto Vallarta',
+        icon: '🕺',
+        location: 'Zona Romántica, Puerto Vallarta',
+        locationMap: 'https://maps.google.com/?q=Zona+Romantica+Puerto+Vallarta+Mexico',
+        desc: "The birthday dinner was just the pre-show. PV's nightlife awaits.",
+        dtStart: '20260307T040000Z',
+        dtEnd: '20260307T080000Z',
+        highlight: false,
+      },
+    ],
+  },
+  {
+    date: 'Saturday, March 7',
+    subtitle: 'Mantamar Beach Club Day',
+    emoji: '🏖️',
+    events: [
+      {
+        id: 'mar7-breakfast',
+        time: '10:00 AM',
+        title: 'Breakfast',
+        icon: '🥐',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: 'Fuel up — beach day is imminent.',
+        dtStart: '20260307T160000Z',
+        dtEnd: '20260307T180000Z',
+        highlight: false,
+      },
+      {
+        id: 'mar7-mantamar',
+        time: '12:00 PM – 6:00 PM',
+        title: 'Mantamar Beach Club — Cabanas Reserved',
+        icon: '🌊',
+        location: 'Mantamar Beach Club, Puerto Vallarta',
+        locationMap: 'https://maps.google.com/?q=Mantamar+Beach+Club+Bar+Sushi+Puerto+Vallarta+Jalisco+Mexico',
+        desc: "Reserved cabanas at PV's iconic LGBT+ beach club. Pool, cocktails, and a crowd that does not miss.",
+        dtStart: '20260307T180000Z',
+        dtEnd: '20260308T000000Z',
+        highlight: true,
+      },
+      {
+        id: 'mar7-dinner',
+        time: '7:00 PM',
+        title: 'Dinner',
+        icon: '🍽️',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: 'Post-beach dinner at the villa. Recharge.',
+        dtStart: '20260308T010000Z',
+        dtEnd: '20260308T030000Z',
+        highlight: false,
+      },
+      {
+        id: 'mar7-out',
+        time: 'Late Night',
+        title: 'Go Out in Puerto Vallarta',
+        icon: '🕺',
+        location: 'Zona Romántica, Puerto Vallarta',
+        locationMap: 'https://maps.google.com/?q=Zona+Romantica+Puerto+Vallarta+Mexico',
+        desc: "Not done yet. Never done.",
+        dtStart: '20260308T030000Z',
+        dtEnd: '20260308T070000Z',
+        highlight: false,
+      },
+    ],
+  },
+  {
+    date: 'Sunday, March 8',
+    subtitle: 'Alley Cat Day Cruise',
+    emoji: '⛵',
+    events: [
+      {
+        id: 'mar8-depart',
+        time: '8:50 AM',
+        title: 'Depart Villa — Boat Pickup',
+        icon: '🚌',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: "Do not be late. The boat has exactly zero patience and we aren't missing it.",
+        dtStart: '20260308T145000Z',
+        dtEnd: '20260308T160000Z',
+        highlight: false,
+      },
+      {
+        id: 'mar8-cruise',
+        time: '10:00 AM – 4:00 PM',
+        title: 'Alley Cat Day Cruise — Open Bar',
+        icon: '⛵',
+        location: 'Alley Cat Sailing, Puerto Vallarta',
+        locationMap: 'https://maps.google.com/?q=Alley+Cat+Sailing+Puerto+Vallarta+Mexico',
+        desc: "Full day on the Pacific. Catamaran. Breakfast and lunch on board. Open. Bar. Pacific views as far as the eye can see. A genuine moment.",
+        dtStart: '20260308T160000Z',
+        dtEnd: '20260308T220000Z',
+        highlight: true,
+      },
+      {
+        id: 'mar8-return',
+        time: '5:00 PM',
+        title: 'Return to Villa · Snacks',
+        icon: '🏡',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: 'Back to base. Snacks waiting. You survived the Pacific. Congratulations.',
+        dtStart: '20260308T230000Z',
+        dtEnd: '20260309T000000Z',
+        highlight: false,
+      },
+      {
+        id: 'mar8-dinner',
+        time: '7:00 PM',
+        title: 'Dinner',
+        icon: '🍽️',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: 'Dinner at the villa before the night begins.',
+        dtStart: '20260309T010000Z',
+        dtEnd: '20260309T030000Z',
+        highlight: false,
+      },
+      {
+        id: 'mar8-out',
+        time: 'Late Night',
+        title: 'Go Out in Puerto Vallarta',
+        icon: '🕺',
+        location: 'Zona Romántica, Puerto Vallarta',
+        locationMap: 'https://maps.google.com/?q=Zona+Romantica+Puerto+Vallarta+Mexico',
+        desc: "After a full day on the water, obviously the correct decision is more.",
+        dtStart: '20260309T030000Z',
+        dtEnd: '20260309T070000Z',
+        highlight: false,
+      },
+    ],
+  },
+  {
+    date: 'Monday, March 9',
+    subtitle: 'Recovery Day',
+    emoji: '😌',
+    events: [
+      {
+        id: 'mar9-breakfast',
+        time: '10:00 AM',
+        title: 'Breakfast',
+        icon: '🥐',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: 'No rush. Take your time. This is a recovery day.',
+        dtStart: '20260309T160000Z',
+        dtEnd: '20260309T180000Z',
+        highlight: false,
+      },
+      {
+        id: 'mar9-lunch',
+        time: '1:00 PM',
+        title: 'Lunch',
+        icon: '🥗',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: 'A slow, beautiful afternoon by the pool. Hydrate.',
+        dtStart: '20260309T190000Z',
+        dtEnd: '20260309T210000Z',
+        highlight: false,
+      },
+      {
+        id: 'mar9-dinner',
+        time: '7:00 PM',
+        title: 'Dinner',
+        icon: '🍽️',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: 'Last real dinner of the trip. Soak it in.',
+        dtStart: '20260310T010000Z',
+        dtEnd: '20260310T030000Z',
+        highlight: false,
+      },
+    ],
+  },
+  {
+    date: 'Tuesday, March 10',
+    subtitle: 'Checkout Day',
+    emoji: '😭',
+    events: [
+      {
+        id: 'mar10-checkout',
+        time: 'By 11:00 AM',
+        title: 'Check Out — Head Home',
+        icon: '✈️',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        desc: "Pack your bags. Tip the staff. Hug everyone. Checkout is 11AM. It's not goodbye, it's see you on the group chat.",
+        dtStart: '20260310T170000Z',
+        dtEnd: '20260310T190000Z',
+        highlight: false,
+      },
+    ],
+  },
 ];
 
-function createParticle(x, y) {
-  const size = Math.random() * 10 + 5;
-  const shape = Math.random() < 0.5 ? 'rect' : 'circle';
-  return {
-    x,
-    y,
-    vx: (Math.random() - 0.5) * 12,
-    vy: Math.random() * -12 - 5,
-    gravity: 0.35,
-    friction: 0.99,
-    rotation: Math.random() * Math.PI * 2,
-    rotationSpeed: (Math.random() - 0.5) * 0.2,
-    color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
-    size,
-    shape,
-    opacity: 1,
-    fadeRate: Math.random() * 0.01 + 0.005,
-  };
-}
+// ── Meals Data ────────────────────────────────────────────────
+const MEALS = [
+  {
+    date: 'March 5 · Arrival Day',
+    meals: [
+      { type: 'dinner',    icon: '🍽️', title: 'Welcome Dinner',    time: '7:00 PM',    desc: 'Menu coming soon — trust that it will be iconic.' },
+    ],
+  },
+  {
+    date: 'March 6 · Birthday Dinner Day',
+    meals: [
+      { type: 'breakfast', icon: '🥐', title: 'Breakfast',         time: '10:00 AM',   desc: 'Menu coming soon.' },
+      { type: 'lunch',     icon: '🥗', title: 'Lunch',             time: '1:00 PM',    desc: 'Menu coming soon.' },
+      { type: 'dinner',    icon: '🍽️', title: 'Birthday Dinner',   time: '7:00 PM',    desc: 'Menu coming soon. Bob wig required, five-star energy mandatory.' },
+    ],
+  },
+  {
+    date: 'March 7 · Mantamar Day',
+    meals: [
+      { type: 'breakfast', icon: '🥐', title: 'Breakfast',                 time: '10:00 AM',    desc: 'Menu coming soon.' },
+      { type: 'lunch',     icon: '🍹', title: 'Lunch at Mantamar',         time: 'At the club', desc: 'Beach club fare. Menu coming soon.' },
+      { type: 'dinner',    icon: '🍽️', title: 'Dinner',                    time: '7:00 PM',    desc: 'Menu coming soon.' },
+    ],
+  },
+  {
+    date: 'March 8 · Cruise Day',
+    meals: [
+      { type: 'breakfast', icon: '🥐', title: 'Breakfast on the Alley Cat', time: '10:00 AM', desc: 'Served on board. Menu coming soon.' },
+      { type: 'lunch',     icon: '🥗', title: 'Lunch on the Alley Cat',     time: 'On board',  desc: 'Served on board with open bar. Menu coming soon.' },
+      { type: 'dinner',    icon: '🍽️', title: 'Dinner',                     time: '7:00 PM',  desc: 'Menu coming soon.' },
+    ],
+  },
+  {
+    date: 'March 9 · Recovery Day',
+    meals: [
+      { type: 'breakfast', icon: '🥐', title: 'Breakfast', time: '10:00 AM', desc: 'Menu coming soon.' },
+      { type: 'lunch',     icon: '🥗', title: 'Lunch',     time: '1:00 PM',  desc: 'Menu coming soon.' },
+      { type: 'dinner',    icon: '🍽️', title: 'Dinner',    time: '7:00 PM',  desc: 'Last dinner of the trip. Menu coming soon.' },
+    ],
+  },
+];
 
-function spawnConfettiBurst(x, y, count = 60) {
-  for (let i = 0; i < count; i++) {
-    confettiParticles.push(createParticle(
-      x + (Math.random() - 0.5) * 40,
-      y + (Math.random() - 0.5) * 40,
-    ));
-  }
-}
+// ── Room Data ─────────────────────────────────────────────────
+const ROOMS = [
+  { room: 'Forte Penthouse Suite', icon: '👑', guests: ['Jared Schifrien', 'Michael Restiano'] },
+  { room: 'Terraza Suite',         icon: '🌅', guests: ['Brandon Azoulai', 'Tristan James'] },
+  { room: 'Terraza Room',          icon: '🏠', guests: ['Charlie Rodgers', 'David Herman'] },
+  { room: 'Pool Suite',            icon: '🏊', guests: ['Eric Miller', 'Stefan Giordani'] },
+  { room: 'Garden Room',           icon: '🌿', guests: ['Sam Kanning-Caplan', 'Dylon Walker'] },
+  { room: 'Mia Horizon Suite',     icon: '🌊', guests: ['Katherine Droppa', 'Nick Lopresto'] },
+  { room: 'Mia Palmera Suite',     icon: '🌴', guests: ['Ryan Spatz', 'Matt Giddens'] },
+  { room: 'Mia Terraza Room',      icon: '✨', guests: ['Brandon Buchthal', 'Charlie Ainbender'] },
+];
 
-function spawnRainConfetti() {
-  const count = 8;
-  for (let i = 0; i < count; i++) {
-    const p = createParticle(
-      Math.random() * confettiCanvas.width,
-      -20,
-    );
-    p.vy = Math.random() * 4 + 2;
-    p.vx = (Math.random() - 0.5) * 3;
-    p.gravity = 0.05;
-    confettiParticles.push(p);
-  }
-}
-
-function drawParticle(p) {
-  ctx.save();
-  ctx.globalAlpha = p.opacity;
-  ctx.fillStyle = p.color;
-  ctx.translate(p.x, p.y);
-  ctx.rotate(p.rotation);
-
-  if (p.shape === 'rect') {
-    ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
-  } else {
-    ctx.beginPath();
-    ctx.arc(0, 0, p.size / 2, 0, Math.PI * 2);
-    ctx.fill();
-  }
-  ctx.restore();
-}
-
-function updateAndDrawConfetti() {
-  ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-
-  confettiParticles = confettiParticles.filter(p => p.opacity > 0.01 && p.y < confettiCanvas.height + 50);
-
-  for (const p of confettiParticles) {
-    p.vy += p.gravity;
-    p.vx *= p.friction;
-    p.x += p.vx;
-    p.y += p.vy;
-    p.rotation += p.rotationSpeed;
-    p.opacity -= p.fadeRate;
-    drawParticle(p);
-  }
-
-  if (confettiParticles.length > 0) {
-    requestAnimationFrame(updateAndDrawConfetti);
-  } else {
-    confettiAnimating = false;
-    ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
-  }
-}
-
-function startConfetti(duration = 4000) {
-  if (!confettiAnimating) {
-    confettiAnimating = true;
-    updateAndDrawConfetti();
-  }
-
-  // Initial burst from center-top
-  spawnConfettiBurst(confettiCanvas.width / 2, confettiCanvas.height * 0.3, 80);
-
-  // Rain confetti
-  const rainInterval = setInterval(spawnRainConfetti, 120);
-
-  if (confettiTimeout) clearTimeout(confettiTimeout);
-  confettiTimeout = setTimeout(() => {
-    clearInterval(rainInterval);
-  }, duration);
-}
-
-/* ─── Countdown Timer ───────────────────────────────────────────────── */
-
-// Birthday — update this date to Jared's actual birthday
-// Format: 'YYYY-MM-DD'
-const BIRTHDAY = '1995-06-15';
-
-function getAge(birthdayStr) {
-  const birthday = new Date(birthdayStr);
-  const now = new Date();
-
-  let years = now.getFullYear() - birthday.getFullYear();
-  let days = 0;
-
-  // Calculate total days lived
-  const totalMs = now - birthday;
-  const totalDays = Math.floor(totalMs / (1000 * 60 * 60 * 24));
-  days = totalDays % 365;
-
-  const hours = now.getHours();
-  const minutes = now.getMinutes();
-  const seconds = now.getSeconds();
-
-  // Adjust years if birthday hasn't occurred this year
-  const thisYearBirthday = new Date(now.getFullYear(), birthday.getMonth(), birthday.getDate());
-  if (now < thisYearBirthday) {
-    years -= 1;
-  }
-
-  return { years, days, hours, minutes, seconds };
-}
-
-function animateNumber(el, target) {
-  const current = parseInt(el.textContent, 10) || 0;
-  if (current === target) return;
-
-  const diff = target - current;
-  const step = diff > 0 ? Math.max(1, Math.floor(Math.abs(diff) / 5)) : -Math.max(1, Math.floor(Math.abs(diff) / 5));
-  const next = current + step;
-
-  el.textContent = Math.abs(next - target) <= Math.abs(step) ? target : next;
-  if (el.textContent != target) {
-    requestAnimationFrame(() => animateNumber(el, target));
-  }
-}
-
-function updateCountdown() {
-  const { years, days, hours, minutes, seconds } = getAge(BIRTHDAY);
-
-  document.getElementById('years').textContent = years;
-  document.getElementById('days').textContent = days;
-  document.getElementById('hours').textContent = hours;
-  document.getElementById('minutes').textContent = minutes;
-  document.getElementById('seconds').textContent = seconds;
-}
-
-// Update every second
-updateCountdown();
-setInterval(updateCountdown, 1000);
-
-/* ─── Wishes System ─────────────────────────────────────────────────── */
-
-const wishForm = document.getElementById('wishForm');
-const wishesList = document.getElementById('wishesList');
-const emojiPicker = document.getElementById('emojiPicker');
-const wishEmojiInput = document.getElementById('wishEmoji');
-
-// Emoji picker
-emojiPicker.addEventListener('click', (e) => {
-  const btn = e.target.closest('.emoji-btn');
-  if (!btn) return;
-
-  emojiPicker.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  wishEmojiInput.value = btn.dataset.emoji;
+// Build lookup: lowercase name -> { room, icon, roommate }
+const ROOM_LOOKUP = {};
+ROOMS.forEach(r => {
+  r.guests.forEach((g, i) => {
+    ROOM_LOOKUP[g.toLowerCase()] = {
+      room: r.room,
+      icon: r.icon,
+      roommate: r.guests[1 - i] || null,
+    };
+  });
 });
 
-// Load saved wishes from localStorage
-function loadWishes() {
-  const saved = JSON.parse(localStorage.getItem('jaredBdayWishes') || '[]');
-  saved.forEach(wish => renderWish(wish, false));
+// ── iCal Utilities ────────────────────────────────────────────
+function escapeICS(str) {
+  return str.replace(/[\\,;]/g, ch => '\\' + ch).replace(/\n/g, '\\n');
 }
 
-function renderWish(wish, prepend = true) {
-  const card = document.createElement('div');
-  card.className = 'wish-card';
-  card.innerHTML = `
-    <div class="wish-emoji">${wish.emoji}</div>
-    <div class="wish-content">
-      <p class="wish-message">"${escapeHtml(wish.message)}"</p>
-      <span class="wish-author">— ${escapeHtml(wish.name)}</span>
+function eventToVEVENT(ev) {
+  return [
+    'BEGIN:VEVENT',
+    `UID:${ev.id}@jared30bday.pvmx2026`,
+    `DTSTART:${ev.dtStart}`,
+    `DTEND:${ev.dtEnd}`,
+    `SUMMARY:${escapeICS("Jared's 30th — " + ev.title)}`,
+    `DESCRIPTION:${escapeICS(ev.desc + ' | Location: ' + ev.location + ', Puerto Vallarta, Mexico')}`,
+    `LOCATION:${escapeICS(ev.location + ', Puerto Vallarta, Mexico')}`,
+    `URL:${ev.locationMap}`,
+    'END:VEVENT',
+  ].join('\r\n');
+}
+
+function wrapInCalendar(vevents) {
+  return [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Jared 30th Birthday PV 2026//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    "X-WR-CALNAME:Jared's 30th Birthday – Puerto Vallarta 2026",
+    'X-WR-TIMEZONE:America/Mexico_City',
+    ...vevents,
+    'END:VCALENDAR',
+  ].join('\r\n');
+}
+
+function downloadICS(content, filename) {
+  const blob = new Blob([content], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// ── Render: Schedule ─────────────────────────────────────────
+function renderScheduleDay(dayIndex) {
+  const day = SCHEDULE[dayIndex];
+  const panel = document.getElementById('schedulePanel');
+
+  const eventsHTML = day.events.map(ev => `
+    <div class="event-card ${ev.highlight ? 'event-card--highlight' : ''}">
+      <div class="event-time">${ev.time}</div>
+      <div class="event-main">
+        <div class="event-icon-title">
+          <span class="event-icon">${ev.icon}</span>
+          <span class="event-title">${ev.title}</span>
+        </div>
+        <p class="event-desc">${ev.desc}</p>
+        <div class="event-location">
+          📍 <a href="${ev.locationMap}" target="_blank" rel="noopener">${ev.location}</a>
+        </div>
+      </div>
+      <div class="event-actions">
+        <button class="event-dl-btn" data-event-id="${ev.id}" data-day="${dayIndex}">
+          ⬇ Add to Calendar
+        </button>
+      </div>
     </div>
+  `).join('');
+
+  panel.innerHTML = `
+    <div class="day-header">
+      <div class="day-header-emoji">${day.emoji}</div>
+      <div class="day-header-text">
+        <h3>${day.date}</h3>
+        <p>${day.subtitle}</p>
+      </div>
+    </div>
+    <div class="events-list">${eventsHTML}</div>
   `;
 
-  if (prepend) {
-    wishesList.insertBefore(card, wishesList.firstChild);
-  } else {
-    wishesList.appendChild(card);
-  }
-}
-
-function saveWish(wish) {
-  const existing = JSON.parse(localStorage.getItem('jaredBdayWishes') || '[]');
-  existing.unshift(wish);
-  localStorage.setItem('jaredBdayWishes', JSON.stringify(existing.slice(0, 50)));
-}
-
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-}
-
-wishForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const name = document.getElementById('wishName').value.trim();
-  const message = document.getElementById('wishMessage').value.trim();
-  const emoji = wishEmojiInput.value;
-
-  if (!name || !message) return;
-
-  const wish = { name, message, emoji, timestamp: Date.now() };
-  renderWish(wish, true);
-  saveWish(wish);
-  wishForm.reset();
-
-  // Reset emoji picker
-  emojiPicker.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('active'));
-  emojiPicker.querySelector('[data-emoji="🎉"]').classList.add('active');
-  wishEmojiInput.value = '🎉';
-
-  // Celebrate!
-  startConfetti(2000);
-
-  // Scroll to wishes
-  wishesList.scrollTop = 0;
-});
-
-loadWishes();
-
-/* ─── Scroll Animations ─────────────────────────────────────────────── */
-
-function setupScrollAnimations() {
-  const animatedEls = document.querySelectorAll(
-    '.countdown-card, .memory-card, .section-header, .wish-form-wrapper, .wishes-display'
-  );
-
-  animatedEls.forEach(el => el.classList.add('animate-on-scroll'));
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => {
-            entry.target.classList.add('visible');
-          }, i * 80);
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
-  );
-
-  animatedEls.forEach(el => observer.observe(el));
-}
-
-setupScrollAnimations();
-
-/* ─── Button Event Handlers ─────────────────────────────────────────── */
-
-document.getElementById('triggerConfetti').addEventListener('click', () => {
-  startConfetti(5000);
-});
-
-document.getElementById('startCelebration').addEventListener('click', () => {
-  startConfetti(4000);
-  // Also burst from the button position
-  const btn = document.getElementById('startCelebration');
-  const rect = btn.getBoundingClientRect();
-  spawnConfettiBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 50);
-});
-
-/* ─── Nav active state on scroll ───────────────────────────────────── */
-
-const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('.nav-links a');
-
-const sectionObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.id;
-        navLinks.forEach(link => {
-          link.style.color = link.getAttribute('href') === `#${id}`
-            ? 'var(--text-primary)'
-            : '';
-        });
-      }
+  panel.querySelectorAll('.event-dl-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const evId = btn.dataset.eventId;
+      const di = parseInt(btn.dataset.day);
+      const ev = SCHEDULE[di].events.find(e => e.id === evId);
+      if (!ev) return;
+      downloadICS(wrapInCalendar([eventToVEVENT(ev)]), `jared-30-${evId}.ics`);
     });
-  },
-  { threshold: 0.4 }
-);
+  });
+}
 
-sections.forEach(s => sectionObserver.observe(s));
+// ── Render: Meals ─────────────────────────────────────────────
+function renderMealsDay(dayIndex) {
+  const day = MEALS[dayIndex];
+  const panel = document.getElementById('mealsPanel');
 
-/* ─── Auto-celebrate on load ────────────────────────────────────────── */
+  panel.innerHTML = `
+    <div class="meals-day-header">${day.date}</div>
+    <div class="meals-grid">
+      ${day.meals.map(m => `
+        <div class="meal-card" data-meal-type="${m.type}">
+          <div class="meal-card-icon">${m.icon}</div>
+          <div class="meal-card-time">${m.time}</div>
+          <div class="meal-card-title">${m.title}</div>
+          <p class="meal-card-desc">${m.desc}</p>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
 
-window.addEventListener('load', () => {
-  setTimeout(() => {
-    startConfetti(3000);
-  }, 800);
-});
+// ── Render: Room List ─────────────────────────────────────────
+function renderRoomList() {
+  const list = document.getElementById('roomList');
+  list.innerHTML = ROOMS.map(r => `
+    <div class="room-list-card">
+      <div class="rlc-room-name">${r.icon} ${r.room}</div>
+      <div class="rlc-guests">${r.guests.join(' & ')}</div>
+    </div>
+  `).join('');
+}
 
-/* ─── Keyboard shortcut ─────────────────────────────────────────────── */
+// ── Room Finder ───────────────────────────────────────────────
+function lookupRoom(name) {
+  const result = document.getElementById('roomResult');
+  const trimmed = name.trim();
+  if (!trimmed) { result.innerHTML = ''; result.style.display = 'none'; return; }
 
-document.addEventListener('keydown', (e) => {
-  // Press 'C' to trigger confetti
-  if (e.key === 'c' || e.key === 'C') {
-    if (!e.ctrlKey && !e.metaKey && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
-      startConfetti(3000);
-    }
+  const key = trimmed.toLowerCase();
+  let match = ROOM_LOOKUP[key];
+
+  // Try partial match on first name
+  if (!match) {
+    const allKeys = Object.keys(ROOM_LOOKUP);
+    const firstName = key.split(' ')[0];
+    const found = allKeys.find(k => k.startsWith(firstName) || k.includes(key));
+    if (found) match = ROOM_LOOKUP[found];
   }
+
+  result.style.display = 'block';
+  if (!match) {
+    result.className = 'room-result room-result--not-found';
+    result.innerHTML = `
+      <div class="room-result-icon">🤷</div>
+      <div class="room-result-label">Hmm, not finding you…</div>
+      <div class="room-result-name" style="font-size:1.1rem;color:rgba(255,255,255,0.65)">Try your full name, or check the full list below.</div>
+    `;
+    return;
+  }
+
+  result.className = 'room-result';
+  result.innerHTML = `
+    <div class="room-result-icon">${match.icon}</div>
+    <div class="room-result-label">Your room</div>
+    <div class="room-result-name">${match.room}</div>
+    <div class="room-result-roomie">Rooming with <strong>${match.roommate || 'yourself — luxurious!'}</strong></div>
+  `;
+}
+
+// ── Countdown ─────────────────────────────────────────────────
+function updateCountdown() {
+  const target = new Date('2026-03-05T06:00:00Z'); // midnight CST (UTC-6)
+  const diff = target - Date.now();
+
+  if (diff <= 0) {
+    ['cdDays','cdHours','cdMins'].forEach(id => { document.getElementById(id).textContent = '0'; });
+    return;
+  }
+  const days  = Math.floor(diff / 86400000);
+  const hours = Math.floor((diff % 86400000) / 3600000);
+  const mins  = Math.floor((diff % 3600000) / 60000);
+  document.getElementById('cdDays').textContent  = days;
+  document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
+  document.getElementById('cdMins').textContent  = String(mins).padStart(2, '0');
+}
+
+// ── Nav ───────────────────────────────────────────────────────
+function initNav() {
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  const ham   = document.getElementById('navHamburger');
+  const links = document.getElementById('navLinks');
+  ham.addEventListener('click', () => links.classList.toggle('open'));
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+}
+
+// ── Scroll Reveal ─────────────────────────────────────────────
+function initScrollReveal() {
+  const els = document.querySelectorAll('.fade-up');
+  if (!('IntersectionObserver' in window) || !els.length) {
+    els.forEach(el => el.classList.add('visible'));
+    return;
+  }
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  els.forEach(el => io.observe(el));
+}
+
+// ── Tabs ──────────────────────────────────────────────────────
+function initTabs() {
+  document.querySelectorAll('#dayTabs .day-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('#dayTabs .day-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+      renderScheduleDay(parseInt(tab.dataset.day));
+    });
+  });
+
+  document.querySelectorAll('#mealTabs .day-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('#mealTabs .day-tab').forEach(t => { t.classList.remove('active'); t.setAttribute('aria-selected','false'); });
+      tab.classList.add('active'); tab.setAttribute('aria-selected','true');
+      renderMealsDay(parseInt(tab.dataset.mday));
+    });
+  });
+}
+
+// ── Room Finder Events ────────────────────────────────────────
+function initRoomFinder() {
+  const input      = document.getElementById('roomInput');
+  const btn        = document.getElementById('roomSearchBtn');
+  const toggleBtn  = document.getElementById('roomListToggle');
+  const roomList   = document.getElementById('roomList');
+
+  btn.addEventListener('click',  () => lookupRoom(input.value));
+  input.addEventListener('keydown', e => { if (e.key === 'Enter') lookupRoom(input.value); });
+
+  toggleBtn.addEventListener('click', () => {
+    const hidden = roomList.hasAttribute('hidden');
+    roomList.toggleAttribute('hidden');
+    toggleBtn.textContent = hidden ? 'Hide room assignments ↑' : 'Show all room assignments ↓';
+  });
+
+  renderRoomList();
+}
+
+// ── Download All ──────────────────────────────────────────────
+function initDownloadAll() {
+  document.getElementById('downloadAllBtn').addEventListener('click', () => {
+    const vevents = SCHEDULE.flatMap(day => day.events.map(ev => eventToVEVENT(ev)));
+    downloadICS(wrapInCalendar(vevents), 'jared-30th-bday-pv-full-trip.ics');
+  });
+}
+
+// ── Init ──────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  initNav();
+  initTabs();
+  initDownloadAll();
+  initRoomFinder();
+  initScrollReveal();
+  renderScheduleDay(0);
+  renderMealsDay(0);
+  updateCountdown();
+  setInterval(updateCountdown, 60000);
 });

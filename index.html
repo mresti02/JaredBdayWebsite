@@ -3,241 +3,308 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Jared! 🎂</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Jared Turns 30 · Puerto Vallarta · March 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
-  <!-- Confetti Canvas -->
-  <canvas id="confetti-canvas"></canvas>
-
   <!-- Navigation -->
-  <nav class="nav">
-    <div class="nav-logo">🎉 Jared's Day</div>
-    <ul class="nav-links">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#countdown">Countdown</a></li>
-      <li><a href="#memories">Memories</a></li>
-      <li><a href="#wishes">Wishes</a></li>
+  <nav class="nav" id="nav">
+    <a href="#hero" class="nav-logo">JARED · 30</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#info" class="nav-link">Details</a></li>
+      <li><a href="#schedule" class="nav-link">Schedule</a></li>
+      <li><a href="#meals" class="nav-link">Eats</a></li>
+      <li><a href="#rooms" class="nav-link">Your Room</a></li>
+      <li><a href="#venues" class="nav-link">Venues</a></li>
     </ul>
-    <button class="nav-confetti-btn" id="triggerConfetti">Celebrate!</button>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- ══════════════════════════════════ HERO ══════════════════════════════════ -->
   <section class="hero" id="hero">
-    <div class="hero-bg-shapes">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-      <div class="shape shape-4"></div>
+    <div class="hero-photos">
+      <div class="hero-photo-main jared-photo jared-photo--1"></div>
+      <div class="hero-photo-stack">
+        <div class="hero-photo-sm jared-photo jared-photo--3"></div>
+        <div class="hero-photo-sm jared-photo jared-photo--5"></div>
+      </div>
     </div>
-
-    <div class="hero-content">
-      <div class="hero-badge">Today is the Day!</div>
+    <div class="hero-left">
+      <p class="hero-eyebrow">Puerto Vallarta · March 5–10, 2026</p>
       <h1 class="hero-title">
-        Happy<br/>
-        <span class="hero-name">Birthday</span><br/>
-        Jared!
+        Mama's<br/>
+        <em>Turning</em><br/>
+        <span class="hero-num">30</span>
       </h1>
-      <p class="hero-subtitle">Wishing you a day as incredible as you are — full of joy, laughter, and all your favorite things.</p>
+      <p class="hero-tagline">16 gays · 1 villa · 6 days · zero restraint.</p>
       <div class="hero-actions">
-        <button class="btn btn-primary" id="startCelebration">Start Celebrating</button>
-        <a href="#wishes" class="btn btn-outline">Leave a Wish</a>
+        <a href="#schedule" class="btn btn-gold">See the Itinerary</a>
+        <a href="#rooms" class="btn btn-outline-light">Find Your Room</a>
       </div>
     </div>
-
-    <div class="hero-visual">
-      <div class="cake-container">
-        <div class="cake">
-          <div class="cake-top">
-            <div class="candle candle-1"><div class="flame"></div></div>
-            <div class="candle candle-2"><div class="flame"></div></div>
-            <div class="candle candle-3"><div class="flame"></div></div>
-            <div class="candle candle-4"><div class="flame"></div></div>
-            <div class="candle candle-5"><div class="flame"></div></div>
-          </div>
-          <div class="cake-layer cake-layer-1">
-            <div class="cake-decoration">✨</div>
-          </div>
-          <div class="cake-layer cake-layer-2">
-            <div class="cake-decoration">🎂</div>
-          </div>
-          <div class="cake-layer cake-layer-3">
-            <div class="cake-decoration">🎊</div>
-          </div>
-          <div class="cake-plate"></div>
-        </div>
-        <div class="floating-emojis">
-          <span class="float-emoji" style="--delay: 0s">🎈</span>
-          <span class="float-emoji" style="--delay: 0.5s">⭐</span>
-          <span class="float-emoji" style="--delay: 1s">🎁</span>
-          <span class="float-emoji" style="--delay: 1.5s">🎊</span>
-          <span class="float-emoji" style="--delay: 2s">✨</span>
-          <span class="float-emoji" style="--delay: 2.5s">🎉</span>
-        </div>
+    <div class="hero-countdown-bar" id="heroCountdown">
+      <div class="hc-item">
+        <span class="hc-num" id="cdDays">--</span>
+        <span class="hc-label">days</span>
       </div>
+      <div class="hc-divider">:</div>
+      <div class="hc-item">
+        <span class="hc-num" id="cdHours">--</span>
+        <span class="hc-label">hours</span>
+      </div>
+      <div class="hc-divider">:</div>
+      <div class="hc-item">
+        <span class="hc-num" id="cdMins">--</span>
+        <span class="hc-label">mins</span>
+      </div>
+      <div class="hc-caption">until Puerto Vallarta</div>
     </div>
   </section>
 
-  <!-- Countdown Section -->
-  <section class="countdown-section" id="countdown">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-tag">Time Together</span>
-        <h2 class="section-title">Counting the Moments</h2>
-        <p class="section-desc">Every second is a new reason to celebrate you.</p>
-      </div>
-
-      <div class="countdown-grid" id="countdownDisplay">
-        <div class="countdown-card">
-          <div class="countdown-number" id="years">0</div>
-          <div class="countdown-label">Years</div>
-        </div>
-        <div class="countdown-card">
-          <div class="countdown-number" id="days">0</div>
-          <div class="countdown-label">Days</div>
-        </div>
-        <div class="countdown-card">
-          <div class="countdown-number" id="hours">0</div>
-          <div class="countdown-label">Hours</div>
-        </div>
-        <div class="countdown-card">
-          <div class="countdown-number" id="minutes">0</div>
-          <div class="countdown-label">Minutes</div>
-        </div>
-        <div class="countdown-card">
-          <div class="countdown-number" id="seconds">0</div>
-          <div class="countdown-label">Seconds</div>
-        </div>
-      </div>
-
-      <p class="countdown-note">of an amazing life lived!</p>
-    </div>
-  </section>
-
-  <!-- Memories Section -->
-  <section class="memories-section" id="memories">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-tag">Photo Album</span>
-        <h2 class="section-title">Favorite Memories</h2>
-        <p class="section-desc">Some of the moments that made this year unforgettable.</p>
-      </div>
-
-      <div class="memories-grid">
-        <div class="memory-card memory-card--large">
-          <div class="memory-placeholder">
-            <span class="memory-icon">📸</span>
-            <p>Add a favorite photo here</p>
-          </div>
-          <div class="memory-overlay">
-            <p class="memory-caption">Your favorite memory</p>
-          </div>
-        </div>
-        <div class="memory-card">
-          <div class="memory-placeholder">
-            <span class="memory-icon">🌟</span>
-            <p>Special moment</p>
-          </div>
-          <div class="memory-overlay">
-            <p class="memory-caption">An incredible moment</p>
-          </div>
-        </div>
-        <div class="memory-card">
-          <div class="memory-placeholder">
-            <span class="memory-icon">🎶</span>
-            <p>Best times</p>
-          </div>
-          <div class="memory-overlay">
-            <p class="memory-caption">The best times</p>
-          </div>
-        </div>
-        <div class="memory-card">
-          <div class="memory-placeholder">
-            <span class="memory-icon">🏆</span>
-            <p>Achievements</p>
-          </div>
-          <div class="memory-overlay">
-            <p class="memory-caption">Your achievements</p>
-          </div>
-        </div>
-        <div class="memory-card">
-          <div class="memory-placeholder">
-            <span class="memory-icon">🌈</span>
-            <p>Adventures</p>
-          </div>
-          <div class="memory-overlay">
-            <p class="memory-caption">Amazing adventures</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Wishes Section -->
-  <section class="wishes-section" id="wishes">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-tag">Birthday Wishes</span>
-        <h2 class="section-title">Leave a Message for Jared</h2>
-        <p class="section-desc">Share your birthday wishes and make this day even more special.</p>
-      </div>
-
-      <div class="wishes-layout">
-        <div class="wish-form-wrapper">
-          <form class="wish-form" id="wishForm">
-            <div class="form-group">
-              <label for="wishName">Your Name</label>
-              <input type="text" id="wishName" placeholder="Enter your name..." required />
-            </div>
-            <div class="form-group">
-              <label for="wishMessage">Your Birthday Wish</label>
-              <textarea id="wishMessage" placeholder="Write your birthday message for Jared..." rows="4" required></textarea>
-            </div>
-            <div class="form-group">
-              <label for="wishEmoji">Pick an emoji</label>
-              <div class="emoji-picker" id="emojiPicker">
-                <button type="button" class="emoji-btn active" data-emoji="🎉">🎉</button>
-                <button type="button" class="emoji-btn" data-emoji="🎂">🎂</button>
-                <button type="button" class="emoji-btn" data-emoji="🥳">🥳</button>
-                <button type="button" class="emoji-btn" data-emoji="🎈">🎈</button>
-                <button type="button" class="emoji-btn" data-emoji="⭐">⭐</button>
-                <button type="button" class="emoji-btn" data-emoji="🎁">🎁</button>
-                <button type="button" class="emoji-btn" data-emoji="💙">💙</button>
-                <button type="button" class="emoji-btn" data-emoji="🔥">🔥</button>
+  <!-- ══════════════════════════════ TRIP INFO ══════════════════════════════════ -->
+  <section class="info-section" id="info">
+    <div class="container">
+      <div class="info-grid">
+        <div class="info-text">
+          <p class="eyebrow">The Details</p>
+          <h2 class="section-title">It's giving <em>international</em>.</h2>
+          <p class="info-desc">Thirty deserves a passport stamp. We're descending on Puerto Vallarta — 16 strong — for six days of sun, siestas, and sanctioned debauchery. Prepare accordingly. Hydrate. Pack a wig.</p>
+          <div class="info-cards">
+            <div class="info-card">
+              <div class="info-card-icon">📅</div>
+              <div class="info-card-body">
+                <div class="info-card-label">Dates</div>
+                <div class="info-card-value">March 5–10, 2026</div>
               </div>
-              <input type="hidden" id="wishEmoji" value="🎉" />
             </div>
-            <button type="submit" class="btn btn-primary btn-full">Send Birthday Wish</button>
-          </form>
-        </div>
-
-        <div class="wishes-display" id="wishesDisplay">
-          <h3 class="wishes-display-title">Birthday Messages</h3>
-          <div class="wishes-list" id="wishesList">
-            <!-- Wishes appear here -->
-            <div class="wish-card wish-card--sample">
-              <div class="wish-emoji">🎊</div>
-              <div class="wish-content">
-                <p class="wish-message">"Happy birthday Jared! You bring so much joy to everyone around you. Hope this year is your best one yet!"</p>
-                <span class="wish-author">— A Friend</span>
+            <div class="info-card">
+              <div class="info-card-icon">🏡</div>
+              <div class="info-card-body">
+                <div class="info-card-label">Our Villa</div>
+                <div class="info-card-value">Las Villas PV</div>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-icon">📍</div>
+              <div class="info-card-body">
+                <div class="info-card-label">Address</div>
+                <div class="info-card-value">
+                  <a href="https://maps.google.com/?q=Las+Villas+PV+Amapas+Puerto+Vallarta+Jalisco+Mexico" target="_blank" rel="noopener" class="map-link">
+                    Amapas, Puerto Vallarta<br/>Jalisco, Mexico
+                    <span class="map-arrow">↗</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-icon">👯</div>
+              <div class="info-card-body">
+                <div class="info-card-label">Guest Count</div>
+                <div class="info-card-value">16 absolutely fabulous people</div>
               </div>
             </div>
           </div>
         </div>
+        <div class="info-gallery">
+          <div class="info-gallery-main jared-photo jared-photo--2">
+            <div class="info-gallery-label">The Birthday Boy</div>
+          </div>
+          <div class="info-gallery-pair">
+            <div class="info-gallery-sm villa-img villa-img--1"></div>
+            <div class="info-gallery-sm villa-img villa-img--2"></div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- ════════════════════════════════ SCHEDULE ════════════════════════════════ -->
+  <section class="schedule-section" id="schedule">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow">The Itinerary</p>
+        <h2 class="section-title">Six days of <em>everything</em>.</h2>
+        <p class="section-desc">Planned days, legendary nights. Tap any event to download it to your calendar.</p>
+      </div>
+      <div class="day-tabs" id="dayTabs" role="tablist">
+        <button class="day-tab active" data-day="0" role="tab" aria-selected="true">
+          <span class="day-tab-date">Mar 5</span>
+          <span class="day-tab-label">Arrival</span>
+        </button>
+        <button class="day-tab" data-day="1" role="tab" aria-selected="false">
+          <span class="day-tab-date">Mar 6</span>
+          <span class="day-tab-label">Birthday Dinner</span>
+        </button>
+        <button class="day-tab" data-day="2" role="tab" aria-selected="false">
+          <span class="day-tab-date">Mar 7</span>
+          <span class="day-tab-label">Mantamar</span>
+        </button>
+        <button class="day-tab" data-day="3" role="tab" aria-selected="false">
+          <span class="day-tab-date">Mar 8</span>
+          <span class="day-tab-label">Day Cruise</span>
+        </button>
+        <button class="day-tab" data-day="4" role="tab" aria-selected="false">
+          <span class="day-tab-date">Mar 9</span>
+          <span class="day-tab-label">Recovery</span>
+        </button>
+        <button class="day-tab" data-day="5" role="tab" aria-selected="false">
+          <span class="day-tab-date">Mar 10</span>
+          <span class="day-tab-label">Checkout</span>
+        </button>
+      </div>
+      <div class="schedule-panel" id="schedulePanel">
+        <!-- Populated by JS -->
+      </div>
+      <div class="schedule-footer">
+        <button class="btn btn-gold" id="downloadAllBtn">⬇ Download Full Trip (.ics)</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════ MEALS ══════════════════════════════════ -->
+  <section class="meals-section" id="meals">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow">The Menu</p>
+        <h2 class="section-title">We eat <em>well</em> here.</h2>
+        <p class="section-desc">Chef-prepared meals throughout the week. Specific menus dropping soon — stay tuned.</p>
+      </div>
+      <div class="day-tabs day-tabs--pink" id="mealTabs" role="tablist">
+        <button class="day-tab active" data-mday="0" role="tab" aria-selected="true">
+          <span class="day-tab-date">Mar 5</span>
+          <span class="day-tab-label">Arrival</span>
+        </button>
+        <button class="day-tab" data-mday="1" role="tab" aria-selected="false">
+          <span class="day-tab-date">Mar 6</span>
+          <span class="day-tab-label">Fri</span>
+        </button>
+        <button class="day-tab" data-mday="2" role="tab" aria-selected="false">
+          <span class="day-tab-date">Mar 7</span>
+          <span class="day-tab-label">Sat</span>
+        </button>
+        <button class="day-tab" data-mday="3" role="tab" aria-selected="false">
+          <span class="day-tab-date">Mar 8</span>
+          <span class="day-tab-label">Cruise</span>
+        </button>
+        <button class="day-tab" data-mday="4" role="tab" aria-selected="false">
+          <span class="day-tab-date">Mar 9</span>
+          <span class="day-tab-label">Recovery</span>
+        </button>
+      </div>
+      <div class="meals-panel" id="mealsPanel">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ ROOM FINDER ════════════════════════════ -->
+  <section class="rooms-section" id="rooms">
+    <div class="rooms-bg jared-photo jared-photo--4"></div>
+    <div class="rooms-overlay"></div>
+    <div class="container rooms-inner">
+      <div class="section-header section-header--light">
+        <p class="eyebrow eyebrow--light">Room Assignments</p>
+        <h2 class="section-title section-title--light">Find your <em>suite</em>, sis.</h2>
+        <p class="section-desc section-desc--light">Type your name to see your room and your roommate. The packing list is on you.</p>
+      </div>
+      <div class="room-finder">
+        <div class="room-search-bar">
+          <input type="text" id="roomInput" class="room-input" placeholder="Your name…" autocomplete="off" />
+          <button class="btn btn-gold" id="roomSearchBtn">Find My Room</button>
+        </div>
+        <div class="room-result" id="roomResult"></div>
+        <div class="room-list-toggle">
+          <button class="room-list-btn" id="roomListToggle">Show all room assignments ↓</button>
+        </div>
+        <div class="room-list" id="roomList" hidden>
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ VENUES ═════════════════════════════════ -->
+  <section class="venues-section" id="venues">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow">The Spots</p>
+        <h2 class="section-title">Places we'll <em>slay</em>.</h2>
+      </div>
+      <div class="venues-grid">
+
+        <!-- Las Villas PV -->
+        <div class="venue-card venue-card--wide">
+          <div class="venue-img villa-img villa-img--3"></div>
+          <div class="venue-body">
+            <span class="venue-tag">Home Base · All Week</span>
+            <h3 class="venue-name">Las Villas PV</h3>
+            <p class="venue-desc">Our stunning private villa in Conchas Chinas — ocean views, a pool, and all the square footage 16 people need to exist without drama. (Results may vary on the drama.)</p>
+            <a href="https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico" target="_blank" rel="noopener" class="venue-map-btn">
+              📍 Open in Google Maps
+            </a>
+          </div>
+        </div>
+
+        <!-- Mantamar -->
+        <div class="venue-card">
+          <div class="venue-img mantamar-img"></div>
+          <div class="venue-body">
+            <span class="venue-tag">March 7 · 12–6PM</span>
+            <h3 class="venue-name">Mantamar Beach Club</h3>
+            <p class="venue-desc">PV's iconic LGBT+ beach club. Reserved cabanas, a pool that never misses, and a crowd that absolutely knows what's good. It's our Saturday.</p>
+            <a href="https://maps.google.com/?q=Mantamar+Beach+Club+Bar+Sushi+Puerto+Vallarta+Jalisco+Mexico" target="_blank" rel="noopener" class="venue-map-btn">
+              📍 Open in Google Maps
+            </a>
+          </div>
+        </div>
+
+        <!-- Alley Cat Sailing -->
+        <div class="venue-card">
+          <div class="venue-img alleycat-img"></div>
+          <div class="venue-body">
+            <span class="venue-tag">March 8 · Day Cruise</span>
+            <h3 class="venue-name">Alley Cat Sailing</h3>
+            <p class="venue-desc">A full day on the Pacific — catamaran, open bar, breakfast and lunch on board. We're leaving at 8:50AM so set two alarms, queens.</p>
+            <a href="https://maps.google.com/?q=Alley+Cat+Sailing+Puerto+Vallarta+Mexico" target="_blank" rel="noopener" class="venue-map-btn">
+              📍 Open in Google Maps
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════ PHOTO STRIP ═══════════════════════════════ -->
+  <section class="photo-strip">
+    <div class="photo-strip-header">
+      <h2 class="photo-strip-title">30 years of <em>this one</em>. ✨</h2>
+    </div>
+    <div class="photo-strip-scroll">
+      <div class="strip-photo jared-photo jared-photo--1"></div>
+      <div class="strip-photo jared-photo jared-photo--2"></div>
+      <div class="strip-photo jared-photo jared-photo--3"></div>
+      <div class="strip-photo jared-photo jared-photo--4"></div>
+      <div class="strip-photo jared-photo jared-photo--5"></div>
+      <!-- Duplicate for seamless scroll -->
+      <div class="strip-photo jared-photo jared-photo--1"></div>
+      <div class="strip-photo jared-photo jared-photo--2"></div>
+      <div class="strip-photo jared-photo jared-photo--3"></div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ FOOTER ══════════════════════════════════ -->
   <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-emojis">🎉 🎂 🎈 🥳 🎁 🎊 ✨ ⭐</div>
-      <p class="footer-message">Made with love for Jared's special day</p>
-      <p class="footer-year">Happy Birthday! 🎂</p>
+    <div class="container footer-inner">
+      <div class="footer-title">Happy 30th, Jared.</div>
+      <p class="footer-dates">Puerto Vallarta · March 5–10, 2026</p>
+      <p class="footer-love">Made with love (and a lot of nerve) for the birthday boy. 🩷</p>
     </div>
   </footer>
 

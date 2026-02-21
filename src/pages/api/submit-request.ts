@@ -24,17 +24,17 @@ export const POST: APIRoute = async ({ request }) => {
     });
   }
 
+  const params = new URLSearchParams({
+    name: name.trim(),
+    request: requestText.trim(),
+    timestamp: new Date().toISOString(),
+  });
+
   let sheetResp: Response;
   try {
-    sheetResp = await fetch(webhookUrl, {
-      method: 'POST',
+    sheetResp = await fetch(`${webhookUrl}?${params.toString()}`, {
+      method: 'GET',
       redirect: 'follow',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: name.trim(),
-        request: requestText.trim(),
-        timestamp: new Date().toISOString(),
-      }),
     });
   } catch (err) {
     const msg = err instanceof Error ? err.message : String(err);

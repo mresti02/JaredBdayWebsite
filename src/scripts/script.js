@@ -618,17 +618,16 @@ function initRequestsForm() {
     feedback.hidden = true;
 
     try {
-      const resp = await fetch('/Jared30/api/submit-request', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, request }),
+      const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx2Wh85cb3dWdQOV5iU3OOA31emxdE_QE8AT_NtFIdLVFhwn6k3_nsjg-mpLddmt_x3/exec';
+      const params = new URLSearchParams({
+        name: name.trim(),
+        request: request.trim(),
+        timestamp: new Date().toISOString(),
       });
-      const text = await resp.text();
-      let data;
-      try { data = JSON.parse(text); }
-      catch { throw new Error(`Server error (HTTP ${resp.status}) — site may need redeploying`); }
+      const resp = await fetch(`${APPS_SCRIPT_URL}?${params.toString()}`);
+      const data = await resp.json();
 
-      if (resp.ok && data.ok) {
+      if (data.ok) {
         feedback.textContent = '✓ Request submitted! We\'ve got you covered.';
         feedback.className = 'requests-feedback requests-feedback--success';
         form.reset();

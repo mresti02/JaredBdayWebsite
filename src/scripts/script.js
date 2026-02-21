@@ -623,7 +623,10 @@ function initRequestsForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, request }),
       });
-      const data = await resp.json();
+      const text = await resp.text();
+      let data;
+      try { data = JSON.parse(text); }
+      catch { throw new Error(`Server error (HTTP ${resp.status}) — site may need redeploying`); }
 
       if (resp.ok && data.ok) {
         feedback.textContent = '✓ Request submitted! We\'ve got you covered.';

@@ -170,10 +170,13 @@ ul { list-style: none; }
   align-items: center;
   justify-content: space-between;
   padding: 18px 40px;
+  background: rgba(11,25,41,0.72);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition: background 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 .nav.scrolled {
-  background: rgba(11,25,41,0.95);
+  background: rgba(11,25,41,0.97);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 2px 20px rgba(0,0,0,0.3);
@@ -272,9 +275,10 @@ ul { list-style: none; }
 }
 .hero-num {
   display: block;
-  font-size: clamp(6rem, 14vw, 11rem);
+  font-size: clamp(5rem, 12vw, 9rem);
   font-weight: 700;
-  line-height: 0.85;
+  line-height: 0.9;
+  padding-bottom: 0.12em;
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--pink) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -468,7 +472,7 @@ ul { list-style: none; }
 }
 .info-gallery-pair {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 12px;
 }
 .info-gallery-sm {
@@ -749,6 +753,7 @@ ul { list-style: none; }
 .rooms-bg {
   position: absolute;
   inset: 0;
+  background-position: center 20% !important;
 }
 .rooms-overlay {
   position: absolute;
@@ -1077,6 +1082,7 @@ ul { list-style: none; }
 .jared-photo--5 { background-image: url('/Jared30/PV%20site%20assets/Jared_5.JPG'); }
 .jared-photo--6 { background-image: url('/Jared30/PV%20site%20assets/Jared_6.JPG'); }
 .jared-photo--7 { background-image: url('/Jared30/PV%20site%20assets/Jared_7.jpeg'); }
+.jared-photo--8 { background-image: url('/Jared30/PV%20site%20assets/Jared_8.jpeg'); }
 
 /* Villa images */
 .villa-img {
@@ -1231,7 +1237,6 @@ ul { list-style: none; }
   .hero-actions .btn { text-align: center; justify-content: center; }
 
   .info-gallery-pair { grid-template-columns: 1fr; }
-  .info-gallery-sm:last-child { display: none; }
 
   .event-card { grid-template-columns: 1fr; }
   .event-time { text-align: left; }

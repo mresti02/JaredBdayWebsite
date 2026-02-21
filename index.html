@@ -1,246 +1,261 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday Jared! 🎂</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Jared! 🎂</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
 
-  <!-- Confetti Canvas -->
-  <canvas id="confetti-canvas"></canvas>
+    <!-- Navigation -->
+    <nav class="nav">
+      <div class="nav-logo">🎉 Jared's Day</div>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#countdown">Countdown</a></li>
+        <li><a href="#memories">Memories</a></li>
+        <li><a href="#wishes">Wishes</a></li>
+      </ul>
+      <button class="nav-confetti-btn" id="triggerConfetti">Celebrate!</button>
+    </nav>
 
-  <!-- Navigation -->
-  <nav class="nav">
-    <div class="nav-logo">🎉 Jared's Day</div>
-    <ul class="nav-links">
-      <li><a href="#hero">Home</a></li>
-      <li><a href="#countdown">Countdown</a></li>
-      <li><a href="#memories">Memories</a></li>
-      <li><a href="#wishes">Wishes</a></li>
-    </ul>
-    <button class="nav-confetti-btn" id="triggerConfetti">Celebrate!</button>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="hero" id="hero">
-    <div class="hero-bg-shapes">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-      <div class="shape shape-4"></div>
-    </div>
-
-    <div class="hero-content">
-      <div class="hero-badge">Today is the Day!</div>
-      <h1 class="hero-title">
-        Happy<br/>
-        <span class="hero-name">Birthday</span><br/>
-        Jared!
-      </h1>
-      <p class="hero-subtitle">Wishing you a day as incredible as you are — full of joy, laughter, and all your favorite things.</p>
-      <div class="hero-actions">
-        <button class="btn btn-primary" id="startCelebration">Start Celebrating</button>
-        <a href="#wishes" class="btn btn-outline">Leave a Wish</a>
-      </div>
-    </div>
-
-    <div class="hero-visual">
-      <div class="cake-container">
-        <div class="cake">
-          <div class="cake-top">
-            <div class="candle candle-1"><div class="flame"></div></div>
-            <div class="candle candle-2"><div class="flame"></div></div>
-            <div class="candle candle-3"><div class="flame"></div></div>
-            <div class="candle candle-4"><div class="flame"></div></div>
-            <div class="candle candle-5"><div class="flame"></div></div>
-          </div>
-          <div class="cake-layer cake-layer-1">
-            <div class="cake-decoration">✨</div>
-          </div>
-          <div class="cake-layer cake-layer-2">
-            <div class="cake-decoration">🎂</div>
-          </div>
-          <div class="cake-layer cake-layer-3">
-            <div class="cake-decoration">🎊</div>
-          </div>
-          <div class="cake-plate"></div>
-        </div>
-        <div class="floating-emojis">
-          <span class="float-emoji" style="--delay: 0s">🎈</span>
-          <span class="float-emoji" style="--delay: 0.5s">⭐</span>
-          <span class="float-emoji" style="--delay: 1s">🎁</span>
-          <span class="float-emoji" style="--delay: 1.5s">🎊</span>
-          <span class="float-emoji" style="--delay: 2s">✨</span>
-          <span class="float-emoji" style="--delay: 2.5s">🎉</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Countdown Section -->
-  <section class="countdown-section" id="countdown">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-tag">Time Together</span>
-        <h2 class="section-title">Counting the Moments</h2>
-        <p class="section-desc">Every second is a new reason to celebrate you.</p>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="hero-bg-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
       </div>
 
-      <div class="countdown-grid" id="countdownDisplay">
-        <div class="countdown-card">
-          <div class="countdown-number" id="years">0</div>
-          <div class="countdown-label">Years</div>
-        </div>
-        <div class="countdown-card">
-          <div class="countdown-number" id="days">0</div>
-          <div class="countdown-label">Days</div>
-        </div>
-        <div class="countdown-card">
-          <div class="countdown-number" id="hours">0</div>
-          <div class="countdown-label">Hours</div>
-        </div>
-        <div class="countdown-card">
-          <div class="countdown-number" id="minutes">0</div>
-          <div class="countdown-label">Minutes</div>
-        </div>
-        <div class="countdown-card">
-          <div class="countdown-number" id="seconds">0</div>
-          <div class="countdown-label">Seconds</div>
+      <div class="hero-content">
+        <div class="hero-badge">Today is the Day!</div>
+        <h1 class="hero-title">
+          Happy<br />
+          <span class="hero-name">Birthday</span><br />
+          Jared!
+        </h1>
+        <p class="hero-subtitle">
+          Wishing you a day as incredible as you are — full of joy, laughter, and all your favorite
+          things.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" id="startCelebration">Start Celebrating</button>
+          <a href="#wishes" class="btn btn-outline">Leave a Wish</a>
         </div>
       </div>
 
-      <p class="countdown-note">of an amazing life lived!</p>
-    </div>
-  </section>
-
-  <!-- Memories Section -->
-  <section class="memories-section" id="memories">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-tag">Photo Album</span>
-        <h2 class="section-title">Favorite Memories</h2>
-        <p class="section-desc">Some of the moments that made this year unforgettable.</p>
-      </div>
-
-      <div class="memories-grid">
-        <div class="memory-card memory-card--large">
-          <div class="memory-placeholder">
-            <span class="memory-icon">📸</span>
-            <p>Add a favorite photo here</p>
-          </div>
-          <div class="memory-overlay">
-            <p class="memory-caption">Your favorite memory</p>
-          </div>
-        </div>
-        <div class="memory-card">
-          <div class="memory-placeholder">
-            <span class="memory-icon">🌟</span>
-            <p>Special moment</p>
-          </div>
-          <div class="memory-overlay">
-            <p class="memory-caption">An incredible moment</p>
-          </div>
-        </div>
-        <div class="memory-card">
-          <div class="memory-placeholder">
-            <span class="memory-icon">🎶</span>
-            <p>Best times</p>
-          </div>
-          <div class="memory-overlay">
-            <p class="memory-caption">The best times</p>
-          </div>
-        </div>
-        <div class="memory-card">
-          <div class="memory-placeholder">
-            <span class="memory-icon">🏆</span>
-            <p>Achievements</p>
-          </div>
-          <div class="memory-overlay">
-            <p class="memory-caption">Your achievements</p>
-          </div>
-        </div>
-        <div class="memory-card">
-          <div class="memory-placeholder">
-            <span class="memory-icon">🌈</span>
-            <p>Adventures</p>
-          </div>
-          <div class="memory-overlay">
-            <p class="memory-caption">Amazing adventures</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Wishes Section -->
-  <section class="wishes-section" id="wishes">
-    <div class="section-container">
-      <div class="section-header">
-        <span class="section-tag">Birthday Wishes</span>
-        <h2 class="section-title">Leave a Message for Jared</h2>
-        <p class="section-desc">Share your birthday wishes and make this day even more special.</p>
-      </div>
-
-      <div class="wishes-layout">
-        <div class="wish-form-wrapper">
-          <form class="wish-form" id="wishForm">
-            <div class="form-group">
-              <label for="wishName">Your Name</label>
-              <input type="text" id="wishName" placeholder="Enter your name..." required />
+      <div class="hero-visual">
+        <div class="cake-container">
+          <div class="cake">
+            <div class="cake-top">
+              <div class="candle candle-1"><div class="flame"></div></div>
+              <div class="candle candle-2"><div class="flame"></div></div>
+              <div class="candle candle-3"><div class="flame"></div></div>
+              <div class="candle candle-4"><div class="flame"></div></div>
+              <div class="candle candle-5"><div class="flame"></div></div>
             </div>
-            <div class="form-group">
-              <label for="wishMessage">Your Birthday Wish</label>
-              <textarea id="wishMessage" placeholder="Write your birthday message for Jared..." rows="4" required></textarea>
+            <div class="cake-layer cake-layer-1">
+              <div class="cake-decoration">✨</div>
             </div>
-            <div class="form-group">
-              <label for="wishEmoji">Pick an emoji</label>
-              <div class="emoji-picker" id="emojiPicker">
-                <button type="button" class="emoji-btn active" data-emoji="🎉">🎉</button>
-                <button type="button" class="emoji-btn" data-emoji="🎂">🎂</button>
-                <button type="button" class="emoji-btn" data-emoji="🥳">🥳</button>
-                <button type="button" class="emoji-btn" data-emoji="🎈">🎈</button>
-                <button type="button" class="emoji-btn" data-emoji="⭐">⭐</button>
-                <button type="button" class="emoji-btn" data-emoji="🎁">🎁</button>
-                <button type="button" class="emoji-btn" data-emoji="💙">💙</button>
-                <button type="button" class="emoji-btn" data-emoji="🔥">🔥</button>
+            <div class="cake-layer cake-layer-2">
+              <div class="cake-decoration">🎂</div>
+            </div>
+            <div class="cake-layer cake-layer-3">
+              <div class="cake-decoration">🎊</div>
+            </div>
+            <div class="cake-plate"></div>
+          </div>
+          <div class="floating-emojis">
+            <span class="float-emoji" style="--delay: 0s">🎈</span>
+            <span class="float-emoji" style="--delay: 0.5s">⭐</span>
+            <span class="float-emoji" style="--delay: 1s">🎁</span>
+            <span class="float-emoji" style="--delay: 1.5s">🎊</span>
+            <span class="float-emoji" style="--delay: 2s">✨</span>
+            <span class="float-emoji" style="--delay: 2.5s">🎉</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Countdown Section -->
+    <section class="countdown-section" id="countdown">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">Time Together</span>
+          <h2 class="section-title">Counting the Moments</h2>
+          <p class="section-desc">Every second is a new reason to celebrate you.</p>
+        </div>
+
+        <div class="countdown-grid" id="countdownDisplay">
+          <div class="countdown-card">
+            <div class="countdown-number" id="years">0</div>
+            <div class="countdown-label">Years</div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-number" id="days">0</div>
+            <div class="countdown-label">Days</div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-number" id="hours">0</div>
+            <div class="countdown-label">Hours</div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-number" id="minutes">0</div>
+            <div class="countdown-label">Minutes</div>
+          </div>
+          <div class="countdown-card">
+            <div class="countdown-number" id="seconds">0</div>
+            <div class="countdown-label">Seconds</div>
+          </div>
+        </div>
+
+        <p class="countdown-note">of an amazing life lived!</p>
+      </div>
+    </section>
+
+    <!-- Memories Section -->
+    <section class="memories-section" id="memories">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">Photo Album</span>
+          <h2 class="section-title">Favorite Memories</h2>
+          <p class="section-desc">Some of the moments that made this year unforgettable.</p>
+        </div>
+
+        <div class="memories-grid">
+          <div class="memory-card memory-card--large">
+            <div class="memory-placeholder">
+              <span class="memory-icon">📸</span>
+              <p>Add a favorite photo here</p>
+            </div>
+            <div class="memory-overlay">
+              <p class="memory-caption">Your favorite memory</p>
+            </div>
+          </div>
+          <div class="memory-card">
+            <div class="memory-placeholder">
+              <span class="memory-icon">🌟</span>
+              <p>Special moment</p>
+            </div>
+            <div class="memory-overlay">
+              <p class="memory-caption">An incredible moment</p>
+            </div>
+          </div>
+          <div class="memory-card">
+            <div class="memory-placeholder">
+              <span class="memory-icon">🎶</span>
+              <p>Best times</p>
+            </div>
+            <div class="memory-overlay">
+              <p class="memory-caption">The best times</p>
+            </div>
+          </div>
+          <div class="memory-card">
+            <div class="memory-placeholder">
+              <span class="memory-icon">🏆</span>
+              <p>Achievements</p>
+            </div>
+            <div class="memory-overlay">
+              <p class="memory-caption">Your achievements</p>
+            </div>
+          </div>
+          <div class="memory-card">
+            <div class="memory-placeholder">
+              <span class="memory-icon">🌈</span>
+              <p>Adventures</p>
+            </div>
+            <div class="memory-overlay">
+              <p class="memory-caption">Amazing adventures</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wishes Section -->
+    <section class="wishes-section" id="wishes">
+      <div class="section-container">
+        <div class="section-header">
+          <span class="section-tag">Birthday Wishes</span>
+          <h2 class="section-title">Leave a Message for Jared</h2>
+          <p class="section-desc">
+            Share your birthday wishes and make this day even more special.
+          </p>
+        </div>
+
+        <div class="wishes-layout">
+          <div class="wish-form-wrapper">
+            <form class="wish-form" id="wishForm">
+              <div class="form-group">
+                <label for="wishName">Your Name</label>
+                <input type="text" id="wishName" placeholder="Enter your name..." required />
               </div>
-              <input type="hidden" id="wishEmoji" value="🎉" />
-            </div>
-            <button type="submit" class="btn btn-primary btn-full">Send Birthday Wish</button>
-          </form>
-        </div>
+              <div class="form-group">
+                <label for="wishMessage">Your Birthday Wish</label>
+                <textarea
+                  id="wishMessage"
+                  placeholder="Write your birthday message for Jared..."
+                  rows="4"
+                  required
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <label for="wishEmoji">Pick an emoji</label>
+                <div class="emoji-picker" id="emojiPicker">
+                  <button type="button" class="emoji-btn active" data-emoji="🎉">🎉</button>
+                  <button type="button" class="emoji-btn" data-emoji="🎂">🎂</button>
+                  <button type="button" class="emoji-btn" data-emoji="🥳">🥳</button>
+                  <button type="button" class="emoji-btn" data-emoji="🎈">🎈</button>
+                  <button type="button" class="emoji-btn" data-emoji="⭐">⭐</button>
+                  <button type="button" class="emoji-btn" data-emoji="🎁">🎁</button>
+                  <button type="button" class="emoji-btn" data-emoji="💙">💙</button>
+                  <button type="button" class="emoji-btn" data-emoji="🔥">🔥</button>
+                </div>
+                <input type="hidden" id="wishEmoji" value="🎉" />
+              </div>
+              <button type="submit" class="btn btn-primary btn-full">Send Birthday Wish</button>
+            </form>
+          </div>
 
-        <div class="wishes-display" id="wishesDisplay">
-          <h3 class="wishes-display-title">Birthday Messages</h3>
-          <div class="wishes-list" id="wishesList">
-            <!-- Wishes appear here -->
-            <div class="wish-card wish-card--sample">
-              <div class="wish-emoji">🎊</div>
-              <div class="wish-content">
-                <p class="wish-message">"Happy birthday Jared! You bring so much joy to everyone around you. Hope this year is your best one yet!"</p>
-                <span class="wish-author">— A Friend</span>
+          <div class="wishes-display" id="wishesDisplay">
+            <h3 class="wishes-display-title">Birthday Messages</h3>
+            <div class="wishes-list" id="wishesList">
+              <!-- Wishes appear here -->
+              <div class="wish-card wish-card--sample">
+                <div class="wish-emoji">🎊</div>
+                <div class="wish-content">
+                  <p class="wish-message">
+                    "Happy birthday Jared! You bring so much joy to everyone around you. Hope this
+                    year is your best one yet!"
+                  </p>
+                  <span class="wish-author">— A Friend</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-emojis">🎉 🎂 🎈 🥳 🎁 🎊 ✨ ⭐</div>
-      <p class="footer-message">Made with love for Jared's special day</p>
-      <p class="footer-year">Happy Birthday! 🎂</p>
-    </div>
-  </footer>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-emojis">🎉 🎂 🎈 🥳 🎁 🎊 ✨ ⭐</div>
+        <p class="footer-message">Made with love for Jared's special day</p>
+        <p class="footer-year">Happy Birthday! 🎂</p>
+      </div>
+    </footer>
 
-  <script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>

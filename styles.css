@@ -4,22 +4,22 @@
 
 /* --- CSS Variables / Design Tokens --- */
 :root {
-  --color-primary: #6C63FF;
-  --color-primary-light: #8B83FF;
-  --color-primary-dark: #4B44CC;
-  --color-secondary: #FF6B9D;
-  --color-accent: #FFD93D;
-  --color-accent-2: #6BCB77;
-  --color-accent-3: #4D96FF;
+  --color-primary: #6c63ff;
+  --color-primary-light: #8b83ff;
+  --color-primary-dark: #4b44cc;
+  --color-secondary: #ff6b9d;
+  --color-accent: #ffd93d;
+  --color-accent-2: #6bcb77;
+  --color-accent-3: #4d96ff;
 
-  --bg-dark: #0D0D1A;
-  --bg-card: #16162A;
-  --bg-card-hover: #1E1E35;
+  --bg-dark: #0d0d1a;
+  --bg-card: #16162a;
+  --bg-card-hover: #1e1e35;
   --bg-glass: rgba(255, 255, 255, 0.05);
   --bg-glass-border: rgba(255, 255, 255, 0.1);
 
-  --text-primary: #F0F0FF;
-  --text-secondary: #A0A0C0;
+  --text-primary: #f0f0ff;
+  --text-secondary: #a0a0c0;
   --text-muted: #606080;
 
   --font-display: 'Playfair Display', serif;
@@ -46,7 +46,9 @@
 }
 
 /* --- Reset & Base --- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -273,8 +275,13 @@ body {
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-30px) scale(1.05); }
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-30px) scale(1.05);
+  }
 }
 
 .hero-content {
@@ -313,7 +320,12 @@ body {
 }
 
 .hero-name {
-  background: linear-gradient(135deg, var(--color-primary-light), var(--color-secondary), var(--color-accent));
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-light),
+    var(--color-secondary),
+    var(--color-accent)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -374,11 +386,21 @@ body {
   position: relative;
 }
 
-.candle-1 { height: 50px; }
-.candle-2 { height: 65px; }
-.candle-3 { height: 80px; }
-.candle-4 { height: 65px; }
-.candle-5 { height: 50px; }
+.candle-1 {
+  height: 50px;
+}
+.candle-2 {
+  height: 65px;
+}
+.candle-3 {
+  height: 80px;
+}
+.candle-4 {
+  height: 65px;
+}
+.candle-5 {
+  height: 50px;
+}
 
 .flame {
   position: absolute;
@@ -393,11 +415,26 @@ body {
 }
 
 @keyframes flicker {
-  0% { transform: translateX(-50%) scaleX(1) scaleY(1); opacity: 1; }
-  25% { transform: translateX(-50%) scaleX(1.1) scaleY(0.9); opacity: 0.9; }
-  50% { transform: translateX(-50%) scaleX(0.9) scaleY(1.1); opacity: 1; }
-  75% { transform: translateX(-50%) scaleX(1.05) scaleY(0.95); opacity: 0.95; }
-  100% { transform: translateX(-50%) scaleX(1) scaleY(1); opacity: 1; }
+  0% {
+    transform: translateX(-50%) scaleX(1) scaleY(1);
+    opacity: 1;
+  }
+  25% {
+    transform: translateX(-50%) scaleX(1.1) scaleY(0.9);
+    opacity: 0.9;
+  }
+  50% {
+    transform: translateX(-50%) scaleX(0.9) scaleY(1.1);
+    opacity: 1;
+  }
+  75% {
+    transform: translateX(-50%) scaleX(1.05) scaleY(0.95);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translateX(-50%) scaleX(1) scaleY(1);
+    opacity: 1;
+  }
 }
 
 .cake-layer {
@@ -425,19 +462,19 @@ body {
 .cake-layer-1 {
   width: 180px;
   height: 80px;
-  background: linear-gradient(135deg, #FF6B9D, #FF4081);
+  background: linear-gradient(135deg, #ff6b9d, #ff4081);
 }
 
 .cake-layer-2 {
   width: 240px;
   height: 90px;
-  background: linear-gradient(135deg, #6C63FF, #4B44CC);
+  background: linear-gradient(135deg, #6c63ff, #4b44cc);
 }
 
 .cake-layer-3 {
   width: 300px;
   height: 100px;
-  background: linear-gradient(135deg, #FFD93D, #FF6B1A);
+  background: linear-gradient(135deg, #ffd93d, #ff6b1a);
 }
 
 .cake-decoration {
@@ -448,7 +485,7 @@ body {
 .cake-plate {
   width: 340px;
   height: 20px;
-  background: linear-gradient(to bottom, #A0A0A0, #808080);
+  background: linear-gradient(to bottom, #a0a0a0, #808080);
   border-radius: 0 0 var(--radius-xl) var(--radius-xl);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
@@ -467,17 +504,42 @@ body {
   animation-delay: var(--delay);
 }
 
-.float-emoji:nth-child(1) { top: 10%; left: 0%; }
-.float-emoji:nth-child(2) { top: 5%; right: 10%; }
-.float-emoji:nth-child(3) { top: 60%; left: -5%; }
-.float-emoji:nth-child(4) { top: 70%; right: 0%; }
-.float-emoji:nth-child(5) { bottom: 10%; left: 15%; }
-.float-emoji:nth-child(6) { bottom: 5%; right: 15%; }
+.float-emoji:nth-child(1) {
+  top: 10%;
+  left: 0%;
+}
+.float-emoji:nth-child(2) {
+  top: 5%;
+  right: 10%;
+}
+.float-emoji:nth-child(3) {
+  top: 60%;
+  left: -5%;
+}
+.float-emoji:nth-child(4) {
+  top: 70%;
+  right: 0%;
+}
+.float-emoji:nth-child(5) {
+  bottom: 10%;
+  left: 15%;
+}
+.float-emoji:nth-child(6) {
+  bottom: 5%;
+  right: 15%;
+}
 
 @keyframes floatEmoji {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  33% { transform: translateY(-15px) rotate(-5deg); }
-  66% { transform: translateY(8px) rotate(5deg); }
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-15px) rotate(-5deg);
+  }
+  66% {
+    transform: translateY(8px) rotate(5deg);
+  }
 }
 
 /* --- Section Commons --- */
@@ -651,7 +713,7 @@ body {
   left: 0;
   right: 0;
   padding: 20px;
-  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
   transform: translateY(100%);
   transition: all var(--transition-base);
 }
@@ -805,8 +867,14 @@ body {
 }
 
 @keyframes slideInWish {
-  from { opacity: 0; transform: translateX(20px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .wish-card:hover {
@@ -869,8 +937,13 @@ body {
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .footer-message {
@@ -911,7 +984,9 @@ body {
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
 }
 
 .animate-on-scroll.visible {

@@ -21,8 +21,14 @@ resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
 const CONFETTI_COLORS = [
-  '#6C63FF', '#FF6B9D', '#FFD93D', '#6BCB77',
-  '#4D96FF', '#FF6B1A', '#C77DFF', '#48CAE4',
+  '#6C63FF',
+  '#FF6B9D',
+  '#FFD93D',
+  '#6BCB77',
+  '#4D96FF',
+  '#FF6B1A',
+  '#C77DFF',
+  '#48CAE4',
 ];
 
 function createParticle(x, y) {
@@ -47,20 +53,16 @@ function createParticle(x, y) {
 
 function spawnConfettiBurst(x, y, count = 60) {
   for (let i = 0; i < count; i++) {
-    confettiParticles.push(createParticle(
-      x + (Math.random() - 0.5) * 40,
-      y + (Math.random() - 0.5) * 40,
-    ));
+    confettiParticles.push(
+      createParticle(x + (Math.random() - 0.5) * 40, y + (Math.random() - 0.5) * 40),
+    );
   }
 }
 
 function spawnRainConfetti() {
   const count = 8;
   for (let i = 0; i < count; i++) {
-    const p = createParticle(
-      Math.random() * confettiCanvas.width,
-      -20,
-    );
+    const p = createParticle(Math.random() * confettiCanvas.width, -20);
     p.vy = Math.random() * 4 + 2;
     p.vx = (Math.random() - 0.5) * 3;
     p.gravity = 0.05;
@@ -88,7 +90,9 @@ function drawParticle(p) {
 function updateAndDrawConfetti() {
   ctx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
 
-  confettiParticles = confettiParticles.filter(p => p.opacity > 0.01 && p.y < confettiCanvas.height + 50);
+  confettiParticles = confettiParticles.filter(
+    (p) => p.opacity > 0.01 && p.y < confettiCanvas.height + 50,
+  );
 
   for (const p of confettiParticles) {
     p.vy += p.gravity;
@@ -157,20 +161,6 @@ function getAge(birthdayStr) {
   return { years, days, hours, minutes, seconds };
 }
 
-function animateNumber(el, target) {
-  const current = parseInt(el.textContent, 10) || 0;
-  if (current === target) return;
-
-  const diff = target - current;
-  const step = diff > 0 ? Math.max(1, Math.floor(Math.abs(diff) / 5)) : -Math.max(1, Math.floor(Math.abs(diff) / 5));
-  const next = current + step;
-
-  el.textContent = Math.abs(next - target) <= Math.abs(step) ? target : next;
-  if (el.textContent != target) {
-    requestAnimationFrame(() => animateNumber(el, target));
-  }
-}
-
 function updateCountdown() {
   const { years, days, hours, minutes, seconds } = getAge(BIRTHDAY);
 
@@ -197,7 +187,7 @@ emojiPicker.addEventListener('click', (e) => {
   const btn = e.target.closest('.emoji-btn');
   if (!btn) return;
 
-  emojiPicker.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('active'));
+  emojiPicker.querySelectorAll('.emoji-btn').forEach((b) => b.classList.remove('active'));
   btn.classList.add('active');
   wishEmojiInput.value = btn.dataset.emoji;
 });
@@ -205,7 +195,7 @@ emojiPicker.addEventListener('click', (e) => {
 // Load saved wishes from localStorage
 function loadWishes() {
   const saved = JSON.parse(localStorage.getItem('jaredBdayWishes') || '[]');
-  saved.forEach(wish => renderWish(wish, false));
+  saved.forEach((wish) => renderWish(wish, false));
 }
 
 function renderWish(wish, prepend = true) {
@@ -253,7 +243,7 @@ wishForm.addEventListener('submit', (e) => {
   wishForm.reset();
 
   // Reset emoji picker
-  emojiPicker.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('active'));
+  emojiPicker.querySelectorAll('.emoji-btn').forEach((b) => b.classList.remove('active'));
   emojiPicker.querySelector('[data-emoji="🎉"]').classList.add('active');
   wishEmojiInput.value = '🎉';
 
@@ -270,10 +260,10 @@ loadWishes();
 
 function setupScrollAnimations() {
   const animatedEls = document.querySelectorAll(
-    '.countdown-card, .memory-card, .section-header, .wish-form-wrapper, .wishes-display'
+    '.countdown-card, .memory-card, .section-header, .wish-form-wrapper, .wishes-display',
   );
 
-  animatedEls.forEach(el => el.classList.add('animate-on-scroll'));
+  animatedEls.forEach((el) => el.classList.add('animate-on-scroll'));
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -286,10 +276,10 @@ function setupScrollAnimations() {
         }
       });
     },
-    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    { threshold: 0.1, rootMargin: '0px 0px -50px 0px' },
   );
 
-  animatedEls.forEach(el => observer.observe(el));
+  animatedEls.forEach((el) => observer.observe(el));
 }
 
 setupScrollAnimations();
@@ -315,21 +305,19 @@ const navLinks = document.querySelectorAll('.nav-links a');
 
 const sectionObserver = new IntersectionObserver(
   (entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const id = entry.target.id;
-        navLinks.forEach(link => {
-          link.style.color = link.getAttribute('href') === `#${id}`
-            ? 'var(--text-primary)'
-            : '';
+        navLinks.forEach((link) => {
+          link.style.color = link.getAttribute('href') === `#${id}` ? 'var(--text-primary)' : '';
         });
       }
     });
   },
-  { threshold: 0.4 }
+  { threshold: 0.4 },
 );
 
-sections.forEach(s => sectionObserver.observe(s));
+sections.forEach((s) => sectionObserver.observe(s));
 
 /* ─── Auto-celebrate on load ────────────────────────────────────────── */
 
@@ -344,7 +332,11 @@ window.addEventListener('load', () => {
 document.addEventListener('keydown', (e) => {
   // Press 'C' to trigger confetti
   if (e.key === 'c' || e.key === 'C') {
-    if (!e.ctrlKey && !e.metaKey && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+    if (
+      !e.ctrlKey &&
+      !e.metaKey &&
+      !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)
+    ) {
       startConfetti(3000);
     }
   }

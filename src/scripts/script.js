@@ -618,7 +618,7 @@ function initRequestsForm() {
     feedback.hidden = true;
 
     try {
-      const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx2Wh85cb3dWdQOV5iU3OOA31emxdE_QE8AT_NtFIdLVFhwn6k3_nsjg-mpLddmt_x3/exec';
+      const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLWr6YaU1881CMshQtzoeoX98xMsUx_76cf5PAjYURI3D3jxCWnmOmcph0dWVPojQ/exec';
       const params = new URLSearchParams({
         name: name.trim(),
         request: request.trim(),

@@ -1,5 +1,5 @@
 {
-  "buildCommand": "",
-  "outputDirectory": ".",
-  "devCommand": "npx serve ."
+  "cloud": {
+    "framework": "astro"
+  }
 }

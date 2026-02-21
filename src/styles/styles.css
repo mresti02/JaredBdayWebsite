@@ -1068,10 +1068,10 @@ ul { list-style: none; }
    Replace background-image with url('images/yourphoto.jpg')
    ══════════════════════════════════════════════════════════════ */
 
-/* Jared photos - background-size cover / center for real photos */
+/* Jared photos — crop from the top so faces are always visible */
 .jared-photo {
   background-size: cover;
-  background-position: center;
+  background-position: center 15%;
   background-repeat: no-repeat;
 }
 
@@ -1082,7 +1082,8 @@ ul { list-style: none; }
 .jared-photo--5 { background-image: url('/Jared30/PV%20site%20assets/Jared_5.JPG'); }
 .jared-photo--6 { background-image: url('/Jared30/PV%20site%20assets/Jared_6.JPG'); }
 .jared-photo--7 { background-image: url('/Jared30/PV%20site%20assets/Jared_7.jpeg'); }
-.jared-photo--9 { background-image: url('/Jared30/PV%20site%20assets/Jared_9.jpeg'); }
+/* Jared_9 is a full-length standing shot — pull to top to show face */
+.jared-photo--9 { background-image: url('/Jared30/PV%20site%20assets/Jared_9.jpeg'); background-position: center top; }
 
 /* Villa images */
 .villa-img {

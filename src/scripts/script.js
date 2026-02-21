@@ -599,12 +599,57 @@ function initDownloadAll() {
   });
 }
 
+// ── Villa Requests Form ───────────────────────────────────────
+function initRequestsForm() {
+  const form     = document.getElementById('requestsForm');
+  const feedback = document.getElementById('requestsFeedback');
+  const submitBtn = document.getElementById('requestsSubmit');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const name    = document.getElementById('requestName').value;
+    const request = document.getElementById('requestText').value;
+
+    if (!name || !request.trim()) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending…';
+    feedback.hidden = true;
+
+    try {
+      const resp = await fetch('/Jared30/api/submit-request', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, request }),
+      });
+      const data = await resp.json();
+
+      if (resp.ok && data.ok) {
+        feedback.textContent = '✓ Request submitted! We\'ve got you covered.';
+        feedback.className = 'requests-feedback requests-feedback--success';
+        form.reset();
+      } else {
+        throw new Error(data.error || 'Unknown error');
+      }
+    } catch {
+      feedback.textContent = '✗ Something went wrong — try again or text Michael.';
+      feedback.className = 'requests-feedback requests-feedback--error';
+    } finally {
+      feedback.hidden = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit Request';
+    }
+  });
+}
+
 // ── Init ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initTabs();
   initDownloadAll();
   initRoomFinder();
+  initRequestsForm();
   initScrollReveal();
   renderScheduleDay(0);
   renderMealsDay(0);

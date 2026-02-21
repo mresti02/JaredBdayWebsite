@@ -25,6 +25,7 @@ import '../styles/styles.css';
       <li><a href="#meals" class="nav-link">Eats</a></li>
       <li><a href="#rooms" class="nav-link">Your Room</a></li>
       <li><a href="#venues" class="nav-link">Venues</a></li>
+      <li><a href="#requests" class="nav-link">Requests</a></li>
     </ul>
   </nav>
 
@@ -295,6 +296,59 @@ import '../styles/styles.css';
       <div class="strip-photo jared-photo jared-photo--4"></div>
       <div class="strip-photo jared-photo jared-photo--8"></div>
       <div class="strip-photo jared-photo jared-photo--6"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════ REQUESTS ════════════════════════════════ -->
+  <section class="requests-section" id="requests">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow requests-eyebrow">The Stash</p>
+        <h2 class="section-title">Stock the <em class="requests-em">villa</em>.</h2>
+        <p class="section-desc">Tell us what food and drinks you want waiting for you. We'll make it happen. (Within reason. Mostly.)</p>
+      </div>
+      <form class="requests-form" id="requestsForm" novalidate>
+        <div class="requests-field">
+          <label class="requests-label" for="requestName">Your name</label>
+          <div class="requests-select-wrap">
+            <select class="requests-select" id="requestName" name="name" required>
+              <option value="" disabled selected>Select your name…</option>
+              <option>Jared Schifrien</option>
+              <option>Michael Restiano</option>
+              <option>Brandon Azoulai</option>
+              <option>Tristan James</option>
+              <option>Charlie Rodgers</option>
+              <option>David Herman</option>
+              <option>Eric Miller</option>
+              <option>Stefan Giordani</option>
+              <option>Sam Kanning-Caplan</option>
+              <option>Dylon Walker</option>
+              <option>Katherine Droppa</option>
+              <option>Nick Lopresto</option>
+              <option>Ryan Spatz</option>
+              <option>Matt Giddens</option>
+              <option>Brandon Buchthal</option>
+              <option>Charlie Ainbender</option>
+            </select>
+            <span class="requests-select-arrow">↓</span>
+          </div>
+        </div>
+        <div class="requests-field">
+          <label class="requests-label" for="requestText">Your request</label>
+          <textarea
+            class="requests-textarea"
+            id="requestText"
+            name="request"
+            rows="5"
+            placeholder="e.g. Tajín-rimmed margs, fresh mango, Casamigos blanco, that good sparkling water, dark chocolate…"
+            required
+          ></textarea>
+        </div>
+        <div class="requests-footer">
+          <button type="submit" class="btn btn-teal requests-submit" id="requestsSubmit">Submit Request</button>
+          <div class="requests-feedback" id="requestsFeedback" hidden></div>
+        </div>
+      </form>
     </div>
   </section>
 

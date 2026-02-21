@@ -1082,8 +1082,13 @@ ul { list-style: none; }
 .jared-photo--5 { background-image: url('/Jared30/PV%20site%20assets/Jared_5.JPG'); }
 .jared-photo--6 { background-image: url('/Jared30/PV%20site%20assets/Jared_6.JPG'); }
 .jared-photo--7 { background-image: url('/Jared30/PV%20site%20assets/Jared_7.jpeg'); }
+/* Jared_8 */
+.jared-photo--8 { background-image: url('/Jared30/PV%20site%20assets/Jared_8.jpeg'); }
 /* Jared_9 is a full-length standing shot — pull to top to show face */
 .jared-photo--9 { background-image: url('/Jared30/PV%20site%20assets/Jared_9.jpeg'); background-position: center top; }
+/* In the hero stack the fixed nav (~65px) overlaps the very top of the slot;
+   push the crop point down so the face clears the nav bar */
+.hero-photo-sm.jared-photo--9 { background-position: center 70px; }
 
 /* Villa images */
 .villa-img {
@@ -1095,16 +1100,14 @@ ul { list-style: none; }
 .villa-img--2 { background-image: url('/Jared30/PV%20site%20assets/Villa_2.avif'); }
 .villa-img--3 { background-image: url('/Jared30/PV%20site%20assets/Villa_2.avif'); }
 
-/* Mantamar — no photo available, keeping gradient */
 .mantamar-img {
-  background-image: linear-gradient(135deg, #0EA5E9 0%, #0D9488 50%, #065F46 100%);
+  background-image: url('/Jared30/PV%20site%20assets/Mantamar_1.jpg');
   background-size: cover;
   background-position: center;
 }
 
-/* Alley Cat — no photo available, keeping gradient */
 .alleycat-img {
-  background-image: linear-gradient(135deg, #BAE6FD 0%, #0EA5E9 40%, #1E40AF 100%);
+  background-image: url('/Jared30/PV%20site%20assets/ally.cat_.slider.1.jpg');
   background-size: cover;
   background-position: center;
 }

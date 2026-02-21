@@ -4,7 +4,7 @@ import cloudflare from "@astrojs/cloudflare";
 // Update mountPath to match the mount path you configure in Webflow Cloud
 // (e.g. "/birthday" if your environment is mounted at mysite.webflow.io/birthday)
 // Use "/" if mounting at the root of your Webflow site.
-const mountPath = "/";
+const mountPath = "/Jared30";
 
 export default defineConfig({
   base: mountPath,

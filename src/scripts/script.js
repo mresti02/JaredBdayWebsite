@@ -16,7 +16,7 @@ const SCHEDULE = [
         title: 'Welcome Snacks',
         icon: '🧃',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: 'Drop your bags, pop something cold, and take a breath. You made it. Vacation starts NOW.',
         dtStart: '20260305T230000Z',
         dtEnd: '20260306T000000Z',
@@ -28,7 +28,7 @@ const SCHEDULE = [
         title: 'Welcome Dinner',
         icon: '🍽️',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: 'First dinner of the week, all 16 of us, together. Welcome to the group trip of the century.',
         dtStart: '20260306T010000Z',
         dtEnd: '20260306T030000Z',
@@ -47,7 +47,7 @@ const SCHEDULE = [
         title: 'Breakfast',
         icon: '🥐',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: 'Morning fuel at the villa. Ease into it.',
         dtStart: '20260306T160000Z',
         dtEnd: '20260306T180000Z',
@@ -59,7 +59,7 @@ const SCHEDULE = [
         title: 'Lunch',
         icon: '🥗',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: 'A light poolside lunch to restore your energy before the evening.',
         dtStart: '20260306T190000Z',
         dtEnd: '20260306T210000Z',
@@ -71,7 +71,7 @@ const SCHEDULE = [
         title: "Jared's Birthday Dinner — Bob Wigs Required",
         icon: '💅',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: "The main event. Bob wigs. Full look. Maximum drama. Don't you dare show up without the wig.",
         dtStart: '20260307T010000Z',
         dtEnd: '20260307T040000Z',
@@ -102,7 +102,7 @@ const SCHEDULE = [
         title: 'Breakfast',
         icon: '🥐',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: 'Fuel up — beach day is imminent.',
         dtStart: '20260307T160000Z',
         dtEnd: '20260307T180000Z',
@@ -126,7 +126,7 @@ const SCHEDULE = [
         title: 'Dinner',
         icon: '🍽️',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: 'Post-beach dinner at the villa. Recharge.',
         dtStart: '20260308T010000Z',
         dtEnd: '20260308T030000Z',
@@ -157,7 +157,7 @@ const SCHEDULE = [
         title: 'Depart Villa — Boat Pickup',
         icon: '🚌',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: "Do not be late. The boat has exactly zero patience and we aren't missing it.",
         dtStart: '20260308T145000Z',
         dtEnd: '20260308T160000Z',
@@ -181,7 +181,7 @@ const SCHEDULE = [
         title: 'Return to Villa · Snacks',
         icon: '🏡',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: 'Back to base. Snacks waiting. You survived the Pacific. Congratulations.',
         dtStart: '20260308T230000Z',
         dtEnd: '20260309T000000Z',
@@ -193,7 +193,7 @@ const SCHEDULE = [
         title: 'Dinner',
         icon: '🍽️',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: 'Dinner at the villa before the night begins.',
         dtStart: '20260309T010000Z',
         dtEnd: '20260309T030000Z',
@@ -224,7 +224,7 @@ const SCHEDULE = [
         title: 'Breakfast',
         icon: '🥐',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: 'No rush. Take your time. This is a recovery day.',
         dtStart: '20260309T160000Z',
         dtEnd: '20260309T180000Z',
@@ -236,7 +236,7 @@ const SCHEDULE = [
         title: 'Lunch',
         icon: '🥗',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: 'A slow, beautiful afternoon by the pool. Hydrate.',
         dtStart: '20260309T190000Z',
         dtEnd: '20260309T210000Z',
@@ -248,7 +248,7 @@ const SCHEDULE = [
         title: 'Dinner',
         icon: '🍽️',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: 'Last real dinner of the trip. Soak it in.',
         dtStart: '20260310T010000Z',
         dtEnd: '20260310T030000Z',
@@ -267,7 +267,7 @@ const SCHEDULE = [
         title: 'Check Out — Head Home',
         icon: '✈️',
         location: 'Las Villas PV',
-        locationMap: 'https://maps.google.com/?q=Las+Villas+PV+Privada+Penas+162+Conchas+Chinas+Puerto+Vallarta+Mexico',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
         desc: "Pack your bags. Tip the staff. Hug everyone. Checkout is 11AM. It's not goodbye, it's see you on the group chat.",
         dtStart: '20260310T170000Z',
         dtEnd: '20260310T190000Z',
@@ -320,18 +320,20 @@ const MEALS = [
 ];
 
 // ── Room Data ─────────────────────────────────────────────────
+const IMG_BASE = '/Jared30/PV%20site%20assets/';
+
 const ROOMS = [
-  { room: 'Forte Penthouse Suite', icon: '👑', guests: ['Jared Schifrien', 'Michael Restiano'] },
-  { room: 'Terraza Suite',         icon: '🌅', guests: ['Brandon Azoulai', 'Tristan James'] },
-  { room: 'Terraza Room',          icon: '🏠', guests: ['Charlie Rodgers', 'David Herman'] },
-  { room: 'Pool Suite',            icon: '🏊', guests: ['Eric Miller', 'Stefan Giordani'] },
-  { room: 'Garden Room',           icon: '🌿', guests: ['Sam Kanning-Caplan', 'Dylon Walker'] },
-  { room: 'Mia Horizon Suite',     icon: '🌊', guests: ['Katherine Droppa', 'Nick Lopresto'] },
-  { room: 'Mia Palmera Suite',     icon: '🌴', guests: ['Ryan Spatz', 'Matt Giddens'] },
-  { room: 'Mia Terraza Room',      icon: '✨', guests: ['Brandon Buchthal', 'Charlie Ainbender'] },
+  { room: 'Forte Penthouse Suite', icon: '👑', guests: ['Jared Schifrien', 'Michael Restiano'], url: 'https://www.lasvillaspv.com/fonte-penthouse',  image: 'Forte_Penthouse_.JPG' },
+  { room: 'Terraza Suite',         icon: '🌅', guests: ['Brandon Azoulai', 'Tristan James'],    url: 'https://www.lasvillaspv.com/terrazasuite',    image: 'Terraza_Suite.JPG' },
+  { room: 'Terraza Room',          icon: '🏠', guests: ['Charlie Rodgers', 'David Herman'],     url: 'https://www.lasvillaspv.com/terrazaroom',     image: 'Terraza_Room.JPG' },
+  { room: 'Pool Suite',            icon: '🏊', guests: ['Eric Miller', 'Stefan Giordani'],      url: 'https://www.lasvillaspv.com/poolsuite',       image: 'Pool_Suite.JPG' },
+  { room: 'Garden Room',           icon: '🌿', guests: ['Sam Kanning-Caplan', 'Dylon Walker'],  url: 'https://www.lasvillaspv.com/gardenroom',      image: 'Garden_Room.JPG' },
+  { room: 'Mia Horizon Suite',     icon: '🌊', guests: ['Katherine Droppa', 'Nick Lopresto'],   url: 'https://www.lasvillaspv.com/miahorizonsuite', image: 'Mia_Horizon_Suite.JPG' },
+  { room: 'Mia Palmera Suite',     icon: '🌴', guests: ['Ryan Spatz', 'Matt Giddens'],          url: 'https://www.lasvillaspv.com/miapalmerasuite', image: 'Mia_Palmera_Suite.JPG' },
+  { room: 'Mia Terraza Room',      icon: '✨', guests: ['Brandon Buchthal', 'Charlie Ainbender'], url: 'https://www.lasvillaspv.com/miaterrazaroom', image: 'Mia_Terrazza_Room.JPG' },
 ];
 
-// Build lookup: lowercase name -> { room, icon, roommate }
+// Build lookup: lowercase name -> { room, icon, roommate, url, image }
 const ROOM_LOOKUP = {};
 ROOMS.forEach(r => {
   r.guests.forEach((g, i) => {
@@ -339,6 +341,8 @@ ROOMS.forEach(r => {
       room: r.room,
       icon: r.icon,
       roommate: r.guests[1 - i] || null,
+      url: r.url,
+      image: r.image,
     };
   });
 });
@@ -460,10 +464,10 @@ function renderMealsDay(dayIndex) {
 function renderRoomList() {
   const list = document.getElementById('roomList');
   list.innerHTML = ROOMS.map(r => `
-    <div class="room-list-card">
+    <a class="room-list-card" href="${r.url}" target="_blank" rel="noopener">
       <div class="rlc-room-name">${r.icon} ${r.room}</div>
       <div class="rlc-guests">${r.guests.join(' & ')}</div>
-    </div>
+    </a>
   `).join('');
 }
 
@@ -501,6 +505,8 @@ function lookupRoom(name) {
     <div class="room-result-label">Your room</div>
     <div class="room-result-name">${match.room}</div>
     <div class="room-result-roomie">Rooming with <strong>${match.roommate || 'yourself — luxurious!'}</strong></div>
+    <div class="room-result-preview" style="background-image:url('${IMG_BASE}${match.image}')"></div>
+    <a href="${match.url}" target="_blank" rel="noopener" class="room-result-link">View your room ↗</a>
   `;
 }
 

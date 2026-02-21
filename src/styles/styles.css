@@ -850,6 +850,7 @@ ul { list-style: none; }
   gap: 12px;
 }
 .room-list-card {
+  display: block;
   padding: 16px 20px;
   background: rgba(255,255,255,0.06);
   border: 1px solid rgba(255,255,255,0.08);
@@ -859,6 +860,32 @@ ul { list-style: none; }
 .room-list-card:hover {
   background: rgba(201,168,76,0.1);
   border-color: rgba(201,168,76,0.3);
+}
+
+.room-result-preview {
+  width: 100%;
+  height: 180px;
+  border-radius: var(--radius);
+  background-size: cover;
+  background-position: center;
+  margin-top: 18px;
+}
+.room-result-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  padding: 9px 20px;
+  border-radius: 99px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--gold);
+  color: var(--navy);
+  transition: all 0.2s var(--ease);
+}
+.room-result-link:hover {
+  background: var(--gold-light);
+  transform: translateY(-1px);
 }
 .rlc-room-name {
   font-size: 0.7rem;
@@ -1043,49 +1070,32 @@ ul { list-style: none; }
   background-repeat: no-repeat;
 }
 
-/* If you have Jared's photos, add them below:
-   .jared-photo--1 { background-image: url('images/jared-1.jpg'); }
-   etc. */
-.jared-photo--1 {
-  background-image: linear-gradient(135deg, #FF8C42 0%, #FF6B6B 40%, #C9A84C 100%);
-}
-.jared-photo--2 {
-  background-image: linear-gradient(160deg, #F72585 0%, #7209B7 50%, #3A0CA3 100%);
-}
-.jared-photo--3 {
-  background-image: linear-gradient(135deg, #0D9488 0%, #0EA5E9 60%, #38BDF8 100%);
-}
-.jared-photo--4 {
-  background-image: linear-gradient(160deg, #1A0533 0%, #4A0070 40%, #C026D3 100%);
-}
-.jared-photo--5 {
-  background-image: linear-gradient(135deg, #D4AF37 0%, #FF8C42 50%, #FF6B6B 100%);
-}
+.jared-photo--1 { background-image: url('/Jared30/PV%20site%20assets/Jared_1.JPG'); }
+.jared-photo--2 { background-image: url('/Jared30/PV%20site%20assets/Jared_2.jpeg'); }
+.jared-photo--3 { background-image: url('/Jared30/PV%20site%20assets/Jared_3.jpeg'); }
+.jared-photo--4 { background-image: url('/Jared30/PV%20site%20assets/Jared_4.JPG'); }
+.jared-photo--5 { background-image: url('/Jared30/PV%20site%20assets/Jared_5.JPG'); }
+.jared-photo--6 { background-image: url('/Jared30/PV%20site%20assets/Jared_6.JPG'); }
+.jared-photo--7 { background-image: url('/Jared30/PV%20site%20assets/Jared_7.jpeg'); }
 
-/* Villa images — replace with actual villa photos */
+/* Villa images */
 .villa-img {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
-.villa-img--1 {
-  background-image: linear-gradient(135deg, #C9A84C 0%, #D4C17A 40%, #F5E9C8 100%);
-}
-.villa-img--2 {
-  background-image: linear-gradient(160deg, #0B1929 0%, #0D9488 60%, #14B8A6 100%);
-}
-.villa-img--3 {
-  background-image: linear-gradient(135deg, #122036 0%, #1B4F6B 50%, #0D9488 100%);
-}
+.villa-img--1 { background-image: url('/Jared30/PV%20site%20assets/Villa_1.avif'); }
+.villa-img--2 { background-image: url('/Jared30/PV%20site%20assets/Villa_2.avif'); }
+.villa-img--3 { background-image: url('/Jared30/PV%20site%20assets/Villa_2.avif'); }
 
-/* Mantamar — replace with mantamar photo */
+/* Mantamar — no photo available, keeping gradient */
 .mantamar-img {
   background-image: linear-gradient(135deg, #0EA5E9 0%, #0D9488 50%, #065F46 100%);
   background-size: cover;
   background-position: center;
 }
 
-/* Alley Cat — replace with sailing photo */
+/* Alley Cat — no photo available, keeping gradient */
 .alleycat-img {
   background-image: linear-gradient(135deg, #BAE6FD 0%, #0EA5E9 40%, #1E40AF 100%);
   background-size: cover;

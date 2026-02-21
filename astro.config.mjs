@@ -8,7 +8,6 @@ const mountPath = "/Jared30";
 
 export default defineConfig({
   base: mountPath,
-  trailingSlash: "never",
   build: {
     assetsPrefix: mountPath,
   },

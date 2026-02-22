@@ -341,6 +341,12 @@ const MEALS = [
       { type: 'dinner',    icon: '🍽️', title: 'Dinner',    time: '7:00 PM',  desc: 'Last dinner of the trip. Menu coming soon.' },
     ],
   },
+  {
+    date: 'March 10 · Checkout Day',
+    meals: [
+      { type: 'breakfast', icon: '🥐', title: 'Breakfast', time: '10:00 AM', desc: 'Menu coming soon.' },
+    ],
+  },
 ];
 
 // ── Room Data ─────────────────────────────────────────────────

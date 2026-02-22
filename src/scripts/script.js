@@ -304,8 +304,8 @@ const MEALS = [
   {
     date: 'March 8 · Cruise Day',
     meals: [
-      { type: 'breakfast', icon: '🥐', title: 'Breakfast on the Alley Cat', time: '10:00 AM', desc: 'Served on board. Menu coming soon.' },
-      { type: 'lunch',     icon: '🥗', title: 'Lunch on the Alley Cat',     time: 'On board',  desc: 'Served on board with open bar. Menu coming soon.' },
+      { type: 'breakfast', icon: '🥐', title: 'Breakfast on the Alley Cat', time: '10:00 AM', desc: 'Fresh fruit · Coffee cake<br>Juice · Coffee' },
+      { type: 'lunch',     icon: '🌮', title: 'Lunch on the Alley Cat',     time: 'On board',  desc: 'Grilled chicken &amp; veggie fajitas<br>Rice · Beans · Corn tortillas · Salsas<br>Nachos · Quesadillas · Chips &amp; salsa · Guacamole<br><strong>🍹 Full open bar</strong>' },
       { type: 'dinner',    icon: '🍽️', title: 'Dinner',                     time: '7:00 PM',  desc: 'Menu coming soon.' },
     ],
   },

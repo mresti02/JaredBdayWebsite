@@ -1,52 +1,32 @@
-# Jared's 30th Birthday Website — Project Notes
+# Jared's 30th Birthday Website
 
-## What This Is
-A single-page birthday party website for Jared Schifrien's 30th birthday trip to Puerto Vallarta, March 5–10, 2026. 16 guests staying at Las Villas PV.
+Jared Schifrien's 30th birthday trip to Puerto Vallarta, March 5–10, 2026. 16 guests at Las Villas PV.
 
 ## Stack
-- **Astro** (static site framework) + **Cloudflare Workers** for deployment
-- Single page: `src/pages/index.astro` (HTML structure)
-- All logic in one script: `src/scripts/script.js`
-- All styles in one stylesheet: `src/styles/styles.css`
-- API endpoint: `src/pages/api/submit-request.ts` (villa requests form)
-- Public assets (room photos, etc.) in `public/PV site assets/`
+- Astro + Cloudflare Workers
+- `src/pages/index.astro` — HTML structure
+- `src/scripts/script.js` — all data and logic
+- `src/styles/styles.css` — all styles
+- `src/pages/api/submit-request.ts` — villa requests form handler
+- `public/PV site assets/` — room photos and other assets
 
-## Key Data Structures in `script.js`
+## Data (top of `script.js`)
+- **`SCHEDULE`** — day-by-day events. Fields: `id`, `time`, `title`, `icon`, `location`, `locationMap`, `desc`, `dtStart`/`dtEnd` (UTC ISO for .ics), `highlight`.
+- **`MEALS`** — indexed Mar 5–10. Each entry: `date` label + `meals` array with `type`, `icon`, `title`, `time`, `desc`.
+- **`ROOMS`** — room assignments. Fields: `room`, `icon`, `guests` (two full names), `url`, `image`. A `ROOM_LOOKUP` map is built from this for the room finder.
 
-All data lives at the top of `script.js`, organized into named const arrays:
-
-- **`SCHEDULE`** (line 7): Day-by-day event objects. Each event has `id`, `time`, `title`, `icon`, `location`, `locationMap`, `desc`, `dtStart`/`dtEnd` (UTC, for .ics download), `highlight`.
-- **`MEALS`** (line 304): Indexed by day (Mar 5–10). Each entry has a `date` label and a `meals` array with `type`, `icon`, `title`, `time`, `desc`.
-- **`ROOMS`** (line 352): Room assignments. Each entry has `room`, `icon`, `guests` (array of two full names), `url`, `image` filename. A `ROOM_LOOKUP` map is built from this for the room finder feature.
-
-## Sections / Modules
-
-The page has these nav-linked sections (in order):
-1. `#hero` — Hero banner
-2. `#info` — Trip details
-3. `#schedule` — Day tabs (Mar 5–10) + event cards; iCal download per event
-4. `#meals` — Day tabs (Mar 5–10) + meal cards
-5. `#rooms` — Room photo grid + room finder (search by guest name)
-6. `#venues` — Venue cards
-7. `#requests` — Villa requests form (submits to `submit-request.ts`)
+## Page Sections
+`#hero` → `#info` → `#schedule` → `#meals` → `#rooms` → `#venues` → `#requests`
 
 ## Tab Indexing
-Both the schedule and meals modules use `data-day` / `data-mday` attributes (0-indexed) on tab buttons to select which day to display. Mar 5 = index 0, Mar 10 = index 5.
+Both schedule and meals use 0-indexed `data-day` / `data-mday` attributes on tab buttons. Mar 5 = 0, Mar 10 = 5. Adding a new tab requires both a new button in `index.astro` and a new entry in the corresponding data array.
 
-## Development Workflow
+## Commands
 ```bash
 npm run dev      # local dev server
-npm run build    # build for production
+npm run build    # production build
 npm run preview  # build + wrangler local preview
 ```
 
-## Git / Branch Convention
-- Feature branches follow the pattern: `claude/<description>-<sessionId>`
-- Push with: `git push -u origin <branch-name>`
-- Working branch as of Feb 2026: `claude/birthday-party-website-CDVYf`
-
-## Common Tasks
-- **Add/edit a schedule event**: find the correct day object in `SCHEDULE`, add/modify an event entry.
-- **Add/edit a meal**: find the correct day object in `MEALS`, add/modify a meal entry; also add/update the corresponding tab button in `index.astro`.
-- **Update room assignments**: edit the `ROOMS` array in `script.js`.
-- **Fill in "menu coming soon"**: update the `desc` field on the relevant meal entry in `MEALS`.
+## Branch Convention
+`claude/<description>-<sessionId>` — push with `git push -u origin <branch-name>`

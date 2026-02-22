@@ -11,6 +11,18 @@ const SCHEDULE = [
     emoji: '✈️',
     events: [
       {
+        id: 'mar5-checkin',
+        time: '3:00 PM',
+        title: 'Check-In',
+        icon: '🏡',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
+        desc: 'Rooms are ready at 3PM. Drop your bags, claim your space, and start living your best villa life.',
+        dtStart: '20260305T210000Z',
+        dtEnd: '20260305T230000Z',
+        highlight: false,
+      },
+      {
         id: 'mar5-snacks',
         time: '5:00 PM',
         title: 'Welcome Snacks',
@@ -261,6 +273,18 @@ const SCHEDULE = [
     subtitle: 'Checkout Day',
     emoji: '😭',
     events: [
+      {
+        id: 'mar10-breakfast',
+        time: '10:00 AM',
+        title: 'Breakfast',
+        icon: '🥐',
+        location: 'Las Villas PV',
+        locationMap: 'https://maps.app.goo.gl/csg12ny6PfZZEig56',
+        desc: 'One last breakfast at the villa. Menu coming soon.',
+        dtStart: '20260310T160000Z',
+        dtEnd: '20260310T170000Z',
+        highlight: false,
+      },
       {
         id: 'mar10-checkout',
         time: 'By 11:00 AM',

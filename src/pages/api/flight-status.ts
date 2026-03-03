@@ -22,8 +22,8 @@ export const GET: APIRoute = async ({ request, locals }) => {
 
   // Cloudflare Workers bindings via platformProxy in dev, env in prod
   const apiKey =
-    (locals as any)?.runtime?.env?.AERODATABOX_API_KEY ??
-    import.meta.env.AERODATABOX_API_KEY;
+    (locals as any)?.runtime?.env?.FLIGHTS ??
+    import.meta.env.FLIGHTS;
 
   if (!apiKey) {
     return new Response(JSON.stringify({ error: 'API key not configured' }), {

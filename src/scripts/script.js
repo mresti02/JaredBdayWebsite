@@ -546,7 +546,15 @@ async function fetchFlightData(flightNum, date) {
 
   try {
     const resp = await fetch(`${BASE_PATH}/api/flight-status?flight=${flightNum}&date=${date}`);
-    const data = await resp.json();
+    const text = await resp.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch {
+      // Non-JSON body (e.g. Cloudflare HTML error page) — log the first 300 chars
+      console.error(`[flights] ${flightNum}/${date} → HTTP ${resp.status}, non-JSON body:`, text.slice(0, 300));
+      data = { error: `HTTP ${resp.status}` };
+    }
     if (!resp.ok) {
       console.error(`[flights] ${flightNum}/${date} → HTTP ${resp.status}:`, data);
     }

@@ -576,7 +576,7 @@ async function loadFlightData(tab) {
 
   // Fetch sequentially with a small delay to avoid hitting rate limits
   for (let i = 0; i < flights.length; i++) {
-    if (i > 0) await new Promise(r => setTimeout(r, 300));
+    if (i > 0) await new Promise(r => setTimeout(r, 1100)); // Basic plan: 1 req/sec limit
     const data = await fetchFlightData(flights[i].flight, flights[i].date);
     updateFlightCard(flightCardKey(flights[i]), data, tab);
   }

@@ -397,7 +397,7 @@ const FLIGHTS = {
     { flight: 'AS249',  date: '2026-03-10', airline: 'Alaska Airlines',  guests: ['Michael Restiano', 'Jared Schifrien', 'Nicholas Lopresto', 'Katherine Droppa', 'Charlie Rodgers', 'Charlie Ainbender', 'Stephan Giordani', 'Eric Miller', 'David Herman'] },
     { flight: 'DL1816', date: '2026-03-10', airline: 'Delta',            guests: ['Brandon Buchthal', 'Tristan Azoulai-James', 'Brandon Azoulai-James', 'Sam Kanning-Caplan'] },
     { flight: 'AA2503', date: '2026-03-10', airline: 'American Airlines', guests: ['Ryan Spatz', 'Matt Giddens'] },
-    { flight: 'VB1167', date: '2026-03-10', airline: 'VivaAerobus',      guests: ['Dylon Walker'] },
+    { flight: 'VB1167', date: '2026-03-09', airline: 'VivaAerobus',      guests: ['Dylon Walker'] },
   ],
 };
 

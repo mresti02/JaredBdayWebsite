@@ -22,14 +22,15 @@ export const GET: APIRoute = async (context) => {
       });
     }
 
-    // Read env var safely — locals.runtime may not exist in all environments
+    // Read env var safely — try both PUBLIC_FLIGHTS and FLIGHTS since
+    // Webflow Cloud may expose it under either name in the Worker runtime
     let apiKey: string | undefined;
     try {
-      apiKey = (locals as any).runtime?.env?.FLIGHTS;
+      const env = (locals as any).runtime?.env;
+      apiKey = env?.PUBLIC_FLIGHTS || env?.FLIGHTS;
     } catch {
       // runtime context unavailable
     }
-    if (!apiKey) apiKey = import.meta.env.FLIGHTS as string | undefined;
 
     if (!apiKey) {
       return new Response(JSON.stringify({ error: 'API key not configured' }), {

@@ -17,7 +17,7 @@ export const GET: APIRoute = async ({ locals }) => {
       if (rt) {
         runtime = true;
         envKeys = Object.keys(rt.env || {});
-        hasFlights = !!rt.env?.FLIGHTS;
+        hasFlights = !!(rt.env?.PUBLIC_FLIGHTS || rt.env?.FLIGHTS);
       }
     } catch {}
 

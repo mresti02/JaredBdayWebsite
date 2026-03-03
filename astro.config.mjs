@@ -17,4 +17,12 @@ export default defineConfig({
       enabled: true,
     },
   }),
+  vite: {
+    define: {
+      // Injected at build time — works with any env var name Webflow Cloud exposes
+      __FLIGHTS_KEY__: JSON.stringify(
+        process.env.PUBLIC_FLIGHTS ?? process.env.FLIGHTS ?? ''
+      ),
+    },
+  },
 });

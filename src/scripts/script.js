@@ -378,8 +378,9 @@ ROOMS.forEach(r => {
 });
 
 // ── Flights Data ──────────────────────────────────────────────
-// API key is baked in at build time via PUBLIC_FLIGHTS env var in Webflow Cloud
-const FLIGHTS_API_KEY = import.meta.env.PUBLIC_FLIGHTS;
+// Injected at build time by vite.define in astro.config.mjs (reads PUBLIC_FLIGHTS or FLIGHTS)
+// eslint-disable-next-line no-undef
+const FLIGHTS_API_KEY = __FLIGHTS_KEY__;
 
 const FLIGHTS = {
   arrivals: [

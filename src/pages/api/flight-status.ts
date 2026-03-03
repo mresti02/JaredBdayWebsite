@@ -53,7 +53,7 @@ export const GET: APIRoute = async (context) => {
       const msg = err instanceof Error ? err.message : String(err);
       return new Response(
         JSON.stringify({ error: 'Could not reach AeroDataBox', detail: msg }),
-        { status: 502, headers: { 'Content-Type': 'application/json' } },
+        { status: 200, headers: { 'Content-Type': 'application/json' } },
       );
     }
 
@@ -61,7 +61,7 @@ export const GET: APIRoute = async (context) => {
       const text = await apiResp.text().catch(() => '');
       return new Response(
         JSON.stringify({ error: 'AeroDataBox error', status: apiResp.status, detail: text }),
-        { status: 502, headers: { 'Content-Type': 'application/json' } },
+        { status: 200, headers: { 'Content-Type': 'application/json' } },
       );
     }
 

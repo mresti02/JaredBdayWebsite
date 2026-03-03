@@ -378,9 +378,6 @@ ROOMS.forEach(r => {
 });
 
 // ── Flights Data ──────────────────────────────────────────────
-// Injected at build time by vite.define in astro.config.mjs (reads PUBLIC_FLIGHTS or FLIGHTS)
-// eslint-disable-next-line no-undef
-const FLIGHTS_API_KEY = __FLIGHTS_KEY__;
 
 const FLIGHTS = {
   arrivals: [
@@ -546,21 +543,9 @@ async function fetchFlightData(flightNum, date) {
   const cached = FLIGHT_CACHE[key];
   if (cached && (Date.now() - cached.fetchedAt) < 5 * 60 * 1000) return cached.data;
 
-  if (!FLIGHTS_API_KEY) {
-    console.warn('[flights] PUBLIC_FLIGHTS env var not set — skipping live data');
-    return null;
-  }
-
   try {
-    const resp = await fetch(
-      `https://aerodatabox.p.rapidapi.com/flights/number/${flightNum}/${date}`,
-      {
-        headers: {
-          'X-RapidAPI-Key': FLIGHTS_API_KEY,
-          'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com',
-        },
-      }
-    );
+    const base = import.meta.env.BASE_URL; // e.g. /Jared30/
+    const resp = await fetch(`${base}api/flight-status?flight=${flightNum}&date=${date}`);
     const text = await resp.text();
     let data;
     try {

@@ -306,45 +306,49 @@ const MEALS = [
   {
     date: 'March 5 · Arrival Day',
     meals: [
-      { type: 'dinner',    icon: '🍽️', title: 'Welcome Dinner',    time: '7:00 PM',    desc: 'Menu coming soon — trust that it will be iconic.' },
+      { type: 'dinner',    icon: '🍽️', title: 'Welcome Dinner',  time: '7:00 PM',    desc: 'Chicken, beef &amp; veggie fajitas<br>Arugula salad<br>Rice and beans' },
     ],
   },
   {
     date: 'March 6 · Birthday Dinner Day',
     meals: [
-      { type: 'breakfast', icon: '🥐', title: 'Breakfast',         time: '10:00 AM',   desc: 'Menu coming soon.' },
-      { type: 'lunch',     icon: '🥗', title: 'Lunch',             time: '1:00 PM',    desc: 'Menu coming soon.' },
-      { type: 'dinner',    icon: '🍽️', title: 'Birthday Dinner',   time: '7:00 PM',    desc: 'Menu coming soon. Bob wig required, five-star energy mandatory.' },
+      { type: 'breakfast', icon: '🥐', title: 'Breakfast',        time: '10:00 AM',   desc: 'Assorted fruit plate<br>Breakfast tacos<br>French toast' },
+      { type: 'lunch',     icon: '🥗', title: 'Lunch',            time: '1:00 PM',    desc: 'Ceviche with no shellfish<br>Nachos with arrachera' },
+      { type: 'dinner',    icon: '🍽️', title: 'Birthday Dinner',  time: '7:00 PM',    desc: 'Caesar salad<br>Black bean soup<br>Chicken &amp; vegetable mole' },
+      { type: 'dessert',   icon: '🎂', title: 'Dessert',          time: '',           desc: 'Birthday cake' },
     ],
   },
   {
     date: 'March 7 · Mantamar Day',
     meals: [
-      { type: 'breakfast', icon: '🥐', title: 'Breakfast',                 time: '10:00 AM',    desc: 'Menu coming soon.' },
-      { type: 'lunch',     icon: '🍹', title: 'Lunch at Mantamar',         time: 'At the club', desc: 'Beach club fare. Menu coming soon.' },
-      { type: 'dinner',    icon: '🍽️', title: 'Dinner',                    time: '7:00 PM',    desc: 'Menu coming soon.' },
+      { type: 'breakfast', icon: '🥐', title: 'Breakfast',         time: '10:00 AM',    desc: 'Assorted fruit plate<br>Chilaquiles patrieros (bacon, chicken, eggs, green salsa)<br>Pancakes with berry, strawberry &amp; green tomato jam' },
+      { type: 'lunch',     icon: '🍹', title: 'Lunch at Mantamar', time: 'At the club', desc: 'Beach club fare — trust that it will be iconic.' },
+      { type: 'dinner',    icon: '🍽️', title: 'Dinner',            time: '7:00 PM',     desc: 'Greek salad<br>Tortilla soup<br>Rib-eye and veggie burgers' },
+      { type: 'dessert',   icon: '🍮', title: 'Dessert',           time: '',            desc: 'Rice pudding<br>Caramel and orange flan' },
     ],
   },
   {
     date: 'March 8 · Cruise Day',
     meals: [
-      { type: 'breakfast', icon: '🥐', title: 'Breakfast on the Alley Cat', time: '10:00 AM', desc: 'Fresh fruit · Coffee cake<br>Juice · Coffee' },
-      { type: 'lunch',     icon: '🌮', title: 'Lunch on the Alley Cat',     time: 'On board',  desc: 'Grilled chicken &amp; veggie fajitas<br>Rice · Beans · Corn tortillas · Salsas<br>Nachos · Quesadillas · Chips &amp; salsa · Guacamole<br><strong>🍹 Full open bar</strong>' },
-      { type: 'dinner',    icon: '🍽️', title: 'Dinner',                     time: '7:00 PM',  desc: 'Menu coming soon.' },
+      { type: 'breakfast', icon: '🥐', title: 'Breakfast',          time: 'Before boarding', desc: 'Grab &amp; go protein bars + fruit' },
+      { type: 'lunch',     icon: '🌮', title: 'Lunch on the Alley Cat', time: 'On board',  desc: 'Grilled chicken &amp; veggie fajitas<br>Rice · Beans · Corn tortillas · Salsas<br>Nachos · Quesadillas · Chips &amp; salsa · Guacamole<br><strong>🍹 Full open bar</strong>' },
+      { type: 'dinner',    icon: '🍽️', title: 'Dinner',              time: '7:00 PM',     desc: 'Spinach salad<br>Chicharrón de pescado<br>Stuffed chicken breast' },
+      { type: 'dessert',   icon: '🍰', title: 'Dessert',             time: '',            desc: 'Tres leches cake<br>Espresso tiramisu' },
     ],
   },
   {
     date: 'March 9 · Recovery Day',
     meals: [
-      { type: 'breakfast', icon: '🥐', title: 'Breakfast', time: '10:00 AM', desc: 'Menu coming soon.' },
-      { type: 'lunch',     icon: '🥗', title: 'Lunch',     time: '1:00 PM',  desc: 'Menu coming soon.' },
-      { type: 'dinner',    icon: '🍽️', title: 'Dinner',    time: '7:00 PM',  desc: 'Last dinner of the trip. Menu coming soon.' },
+      { type: 'breakfast', icon: '🥐', title: 'Breakfast', time: '10:00 AM', desc: 'Assorted fruit plate<br>Machaca eggs w/ beef on the side<br>Pancakes with berry, strawberry &amp; green tomato jam' },
+      { type: 'lunch',     icon: '🥗', title: 'Lunch',     time: '1:00 PM',  desc: 'Nachos with arrachera<br>Fish, chicken &amp; al pastor tacos' },
+      { type: 'dinner',    icon: '🍽️', title: 'Dinner',    time: '7:00 PM',  desc: 'Mixed green salad<br>Cream of sweet corn soup<br>Chicken, beef &amp; cheese enchiladas' },
+      { type: 'dessert',   icon: '🍫', title: 'Dessert',   time: '',         desc: 'Hot chocolate cake<br>Fried bananas' },
     ],
   },
   {
     date: 'March 10 · Checkout Day',
     meals: [
-      { type: 'breakfast', icon: '🥐', title: 'Breakfast', time: '10:00 AM', desc: 'Menu coming soon.' },
+      { type: 'breakfast', icon: '🥐', title: 'Breakfast', time: '10:00 AM', desc: 'Assorted fruit plate<br>Chef\'s omelette bar<br>French toast' },
     ],
   },
 ];

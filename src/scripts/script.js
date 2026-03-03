@@ -378,7 +378,8 @@ ROOMS.forEach(r => {
 });
 
 // ── Flights Data ──────────────────────────────────────────────
-const BASE_PATH = '/Jared30';
+// API key is baked in at build time via PUBLIC_FLIGHTS env var in Webflow Cloud
+const FLIGHTS_API_KEY = import.meta.env.PUBLIC_FLIGHTS;
 
 const FLIGHTS = {
   arrivals: [
@@ -544,15 +545,27 @@ async function fetchFlightData(flightNum, date) {
   const cached = FLIGHT_CACHE[key];
   if (cached && (Date.now() - cached.fetchedAt) < 5 * 60 * 1000) return cached.data;
 
+  if (!FLIGHTS_API_KEY) {
+    console.warn('[flights] PUBLIC_FLIGHTS env var not set — skipping live data');
+    return null;
+  }
+
   try {
-    const resp = await fetch(`${BASE_PATH}/api/flight-status?flight=${flightNum}&date=${date}`);
+    const resp = await fetch(
+      `https://aerodatabox.p.rapidapi.com/flights/number/${flightNum}/${date}`,
+      {
+        headers: {
+          'X-RapidAPI-Key': FLIGHTS_API_KEY,
+          'X-RapidAPI-Host': 'aerodatabox.p.rapidapi.com',
+        },
+      }
+    );
     const text = await resp.text();
     let data;
     try {
       data = JSON.parse(text);
     } catch {
-      // Non-JSON body (e.g. Cloudflare HTML error page) — log the first 300 chars
-      console.error(`[flights] ${flightNum}/${date} → HTTP ${resp.status}, non-JSON body:`, text.slice(0, 300));
+      console.error(`[flights] ${flightNum}/${date} → HTTP ${resp.status}, non-JSON:`, text.slice(0, 300));
       data = { error: `HTTP ${resp.status}` };
     }
     if (!resp.ok) {

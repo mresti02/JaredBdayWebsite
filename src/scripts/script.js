@@ -501,6 +501,7 @@ function updateFlightCard(key, liveData, type) {
   if (!statusEl || !routeEl) return;
 
   if (!liveData || liveData.error) {
+    console.error(`[flights] card ${key}:`, liveData?.error || 'null response', liveData?.detail || '');
     statusEl.className = 'flight-status-badge flight-status--error';
     statusEl.querySelector('.flight-status-text').textContent = 'Unavailable';
     return;
@@ -545,11 +546,14 @@ async function fetchFlightData(flightNum, date) {
 
   try {
     const resp = await fetch(`${BASE_PATH}/api/flight-status?flight=${flightNum}&date=${date}`);
-    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     const data = await resp.json();
+    if (!resp.ok) {
+      console.error(`[flights] ${flightNum}/${date} → HTTP ${resp.status}:`, data);
+    }
     FLIGHT_CACHE[key] = { data, fetchedAt: Date.now() };
     return data;
-  } catch {
+  } catch (err) {
+    console.error(`[flights] ${flightNum}/${date} → fetch failed:`, err);
     return null;
   }
 }

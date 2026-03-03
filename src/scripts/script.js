@@ -573,11 +573,13 @@ function renderFlightsPanel(tab) {
 
 async function loadFlightData(tab) {
   const flights = FLIGHTS[tab];
-  const results = await Promise.all(flights.map(f => fetchFlightData(f.flight, f.date)));
 
-  results.forEach((data, i) => {
+  // Fetch sequentially with a small delay to avoid hitting rate limits
+  for (let i = 0; i < flights.length; i++) {
+    if (i > 0) await new Promise(r => setTimeout(r, 300));
+    const data = await fetchFlightData(flights[i].flight, flights[i].date);
     updateFlightCard(flightCardKey(flights[i]), data, tab);
-  });
+  }
 
   const footer = document.getElementById('flightsFooter');
   const lastUpdated = document.getElementById('flightsLastUpdated');

@@ -377,6 +377,233 @@ ROOMS.forEach(r => {
   });
 });
 
+// ── Flights Data ──────────────────────────────────────────────
+const BASE_PATH = '/Jared30';
+
+const FLIGHTS = {
+  arrivals: [
+    { flight: 'AS248',  date: '2026-03-05', airline: 'Alaska Airlines',  guests: ['Michael Restiano', 'Jared Schifrien', 'Nicholas Lopresto', 'Katherine Droppa', 'Charlie Rodgers', 'Charlie Ainbender'] },
+    { flight: 'Y4280',  date: '2026-03-05', airline: 'Volaris',          guests: ['Stephan Giordani', 'Eric Miller'] },
+    { flight: 'AM334',  date: '2026-03-05', airline: 'Aeroméxico',       guests: ['Brandon Buchthal'] },
+    { flight: 'UA1452', date: '2026-03-05', airline: 'United Airlines',  guests: ['Ryan Spatz', 'Matt Giddens'] },
+    { flight: 'DL1941', date: '2026-03-05', airline: 'Delta',            guests: ['Tristan Azoulai-James', 'Brandon Azoulai-James', 'Sam Kanning-Caplan'] },
+    { flight: 'AM336',  date: '2026-03-05', airline: 'Aeroméxico',       guests: ['Dylon Walker'] },
+    { flight: 'AS248',  date: '2026-03-06', airline: 'Alaska Airlines',  guests: ['David Herman'] },
+  ],
+  departures: [
+    { flight: 'AS249',  date: '2026-03-10', airline: 'Alaska Airlines',  guests: ['Michael Restiano', 'Jared Schifrien', 'Nicholas Lopresto', 'Katherine Droppa', 'Charlie Rodgers', 'Charlie Ainbender', 'Stephan Giordani', 'Eric Miller', 'David Herman'] },
+    { flight: 'DL1816', date: '2026-03-10', airline: 'Delta',            guests: ['Brandon Buchthal', 'Tristan Azoulai-James', 'Brandon Azoulai-James', 'Sam Kanning-Caplan'] },
+    { flight: 'AA2503', date: '2026-03-10', airline: 'American Airlines', guests: ['Ryan Spatz', 'Matt Giddens'] },
+    { flight: 'VB1167', date: '2026-03-10', airline: 'VivaAerobus',      guests: ['Dylon Walker'] },
+  ],
+};
+
+const FLIGHT_CACHE = {};
+let activeFlightTab = 'arrivals';
+
+function flightCardKey(f) {
+  return `${f.flight}-${f.date.replace(/-/g, '')}`;
+}
+
+function formatFlightNum(f) {
+  // "AS248" → "AS 248", "Y4280" → "Y4 280"
+  return f.replace(/^([A-Z]{2}|[A-Z]\d)(\d+)$/, '$1 $2');
+}
+
+function flightStatusInfo(status) {
+  const map = {
+    Expected:  { cls: 'expected',  text: 'On Schedule' },
+    EnRoute:   { cls: 'active',    text: 'In the Air' },
+    Landed:    { cls: 'landed',    text: 'Landed' },
+    Departed:  { cls: 'departed',  text: 'Departed' },
+    Delayed:   { cls: 'delayed',   text: 'Delayed' },
+    Cancelled: { cls: 'cancelled', text: 'Cancelled' },
+    Diverted:  { cls: 'diverted',  text: 'Diverted' },
+    Unknown:   { cls: 'unknown',   text: 'Unknown' },
+  };
+  return map[status] || { cls: 'unknown', text: '—' };
+}
+
+function parseAeroTime(str) {
+  // "2026-03-05 10:00-08:00" → "10:00 AM"
+  if (!str) return null;
+  const m = str.match(/\s(\d{2}):(\d{2})/);
+  if (!m) return null;
+  let h = parseInt(m[1], 10);
+  const min = m[2];
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  return `${h}:${min} ${ampm}`;
+}
+
+function getRelevantSegment(dataArray, type) {
+  if (!Array.isArray(dataArray) || !dataArray.length) return null;
+  if (type === 'arrivals') {
+    return dataArray.find(s => s.arrival?.airport?.iata === 'PVR') || dataArray[0];
+  }
+  return dataArray.find(s => s.departure?.airport?.iata === 'PVR') || dataArray[0];
+}
+
+function buildTimeHTML(sched, revised) {
+  if (!sched) return '<div class="flight-route-time">—</div>';
+  const hasDelay = revised && revised !== sched;
+  if (hasDelay) {
+    return `<div class="flight-route-time flight-route-time--original">${sched}</div>
+            <div class="flight-route-time flight-route-time--revised">${revised}</div>`;
+  }
+  return `<div class="flight-route-time">${sched}</div>`;
+}
+
+function renderFlightCardHTML(f, defaultDate) {
+  const key = flightCardKey(f);
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const [, mo, dy] = f.date.split('-');
+  const dateBadge = f.date !== defaultDate
+    ? `<span class="flight-date-tag">${months[+mo - 1]} ${+dy}</span>`
+    : '';
+  const guestChips = f.guests.map(g => `<span class="flight-guest">${g}</span>`).join('');
+
+  return `
+    <div class="flight-card" data-flight-key="${key}">
+      <div class="flight-card-header">
+        <div>
+          <div class="flight-number">${formatFlightNum(f.flight)}${dateBadge}</div>
+          <div class="flight-airline">${f.airline}</div>
+        </div>
+        <div class="flight-status-badge flight-status--loading" id="fstatus-${key}">
+          <span class="flight-status-dot"></span>
+          <span class="flight-status-text">Loading</span>
+        </div>
+      </div>
+      <div class="flight-route" id="froute-${key}">
+        <div class="flight-route-node">
+          <div class="flight-route-airport">—</div>
+          <div class="flight-route-city"></div>
+          <div class="flight-route-time">—</div>
+        </div>
+        <div class="flight-route-mid">
+          <span class="flight-route-arrow">✈</span>
+        </div>
+        <div class="flight-route-node flight-route-node--dest">
+          <div class="flight-route-airport">—</div>
+          <div class="flight-route-city"></div>
+          <div class="flight-route-time">—</div>
+        </div>
+      </div>
+      <div class="flight-guests">${guestChips}</div>
+    </div>
+  `;
+}
+
+function updateFlightCard(key, liveData, type) {
+  const statusEl = document.getElementById(`fstatus-${key}`);
+  const routeEl  = document.getElementById(`froute-${key}`);
+  if (!statusEl || !routeEl) return;
+
+  if (!liveData || liveData.error) {
+    statusEl.className = 'flight-status-badge flight-status--error';
+    statusEl.querySelector('.flight-status-text').textContent = 'Unavailable';
+    return;
+  }
+
+  const seg = getRelevantSegment(liveData, type);
+  if (!seg) {
+    statusEl.className = 'flight-status-badge flight-status--unknown';
+    statusEl.querySelector('.flight-status-text').textContent = 'No Data';
+    return;
+  }
+
+  // Status badge
+  const info = flightStatusInfo(seg.status);
+  statusEl.className = `flight-status-badge flight-status--${info.cls}`;
+  statusEl.querySelector('.flight-status-text').textContent = info.text;
+
+  // Route
+  const dep = seg.departure;
+  const arr = seg.arrival;
+  routeEl.innerHTML = `
+    <div class="flight-route-node">
+      <div class="flight-route-airport">${dep?.airport?.iata || '—'}</div>
+      <div class="flight-route-city">${dep?.airport?.shortName || dep?.airport?.municipalityName || ''}</div>
+      ${buildTimeHTML(parseAeroTime(dep?.scheduledTime?.local), parseAeroTime(dep?.revisedTime?.local))}
+    </div>
+    <div class="flight-route-mid">
+      <span class="flight-route-arrow">✈</span>
+    </div>
+    <div class="flight-route-node flight-route-node--dest">
+      <div class="flight-route-airport">${arr?.airport?.iata || '—'}</div>
+      <div class="flight-route-city">${arr?.airport?.shortName || arr?.airport?.municipalityName || ''}</div>
+      ${buildTimeHTML(parseAeroTime(arr?.scheduledTime?.local), parseAeroTime(arr?.revisedTime?.local))}
+    </div>
+  `;
+}
+
+async function fetchFlightData(flightNum, date) {
+  const key = `${flightNum}|${date}`;
+  const cached = FLIGHT_CACHE[key];
+  if (cached && (Date.now() - cached.fetchedAt) < 5 * 60 * 1000) return cached.data;
+
+  try {
+    const resp = await fetch(`${BASE_PATH}/api/flight-status?flight=${flightNum}&date=${date}`);
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    FLIGHT_CACHE[key] = { data, fetchedAt: Date.now() };
+    return data;
+  } catch {
+    return null;
+  }
+}
+
+function renderFlightsPanel(tab) {
+  const panel = document.getElementById('flightsPanel');
+  const defaultDate = tab === 'arrivals' ? '2026-03-05' : '2026-03-10';
+  panel.innerHTML = FLIGHTS[tab].map(f => renderFlightCardHTML(f, defaultDate)).join('');
+}
+
+async function loadFlightData(tab) {
+  const flights = FLIGHTS[tab];
+  const results = await Promise.all(flights.map(f => fetchFlightData(f.flight, f.date)));
+
+  results.forEach((data, i) => {
+    updateFlightCard(flightCardKey(flights[i]), data, tab);
+  });
+
+  const footer = document.getElementById('flightsFooter');
+  const lastUpdated = document.getElementById('flightsLastUpdated');
+  if (footer && lastUpdated) {
+    footer.hidden = false;
+    lastUpdated.textContent = `Updated ${new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })}`;
+  }
+}
+
+function initFlights() {
+  renderFlightsPanel('arrivals');
+  loadFlightData('arrivals');
+
+  document.querySelectorAll('#flightTabs .flight-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const ftab = tab.dataset.ftab;
+      activeFlightTab = ftab;
+      document.querySelectorAll('#flightTabs .flight-tab').forEach(t => {
+        const active = t.dataset.ftab === ftab;
+        t.classList.toggle('active', active);
+        t.setAttribute('aria-selected', String(active));
+      });
+      renderFlightsPanel(ftab);
+      loadFlightData(ftab);
+    });
+  });
+
+  document.getElementById('flightsRefreshBtn')?.addEventListener('click', () => {
+    FLIGHTS[activeFlightTab].forEach(f => { delete FLIGHT_CACHE[`${f.flight}|${f.date}`]; });
+    renderFlightsPanel(activeFlightTab);
+    loadFlightData(activeFlightTab);
+  });
+
+  // Auto-refresh every 5 minutes
+  setInterval(() => loadFlightData(activeFlightTab), 5 * 60 * 1000);
+}
+
 // ── iCal Utilities ────────────────────────────────────────────
 function escapeICS(str) {
   return str.replace(/[\\,;]/g, ch => '\\' + ch).replace(/\n/g, '\\n');
@@ -679,6 +906,7 @@ function initRequestsForm() {
 // ── Init ──────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
+  initFlights();
   initTabs();
   initDownloadAll();
   initRoomFinder();

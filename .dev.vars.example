@@ -1,0 +1,4 @@
+# Cloudflare Workers dev secrets — copy to .dev.vars and fill in your key
+# .dev.vars is gitignored; never commit the real key
+
+AERODATABOX_API_KEY=your_rapidapi_key_here

@@ -21,6 +21,7 @@ import '../styles/styles.css';
     </button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#info" class="nav-link">Details</a></li>
+      <li><a href="#flights" class="nav-link">Flights</a></li>
       <li><a href="#schedule" class="nav-link">Schedule</a></li>
       <li><a href="#meals" class="nav-link">Eats</a></li>
       <li><a href="#rooms" class="nav-link">Your Room</a></li>
@@ -124,6 +125,34 @@ import '../styles/styles.css';
             <div class="info-gallery-sm villa-img villa-img--2"></div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════ FLIGHTS ════════════════════════════════ -->
+  <section class="flights-section" id="flights">
+    <div class="container">
+      <div class="section-header">
+        <p class="eyebrow flights-eyebrow">Flight Status</p>
+        <h2 class="section-title flights-title">The crew's <em>in the air</em>.</h2>
+        <p class="section-desc section-desc--light">Real-time status for every flight. Refreshes automatically on travel days.</p>
+      </div>
+      <div class="flight-tabs" id="flightTabs" role="tablist">
+        <button class="flight-tab active" data-ftab="arrivals" role="tab" aria-selected="true">
+          <span class="flight-tab-icon">↓</span>
+          <span class="flight-tab-label">Arrivals <em>· Mar 5</em></span>
+        </button>
+        <button class="flight-tab" data-ftab="departures" role="tab" aria-selected="false">
+          <span class="flight-tab-icon">↑</span>
+          <span class="flight-tab-label">Departures <em>· Mar 10</em></span>
+        </button>
+      </div>
+      <div class="flights-panel" id="flightsPanel">
+        <!-- Populated by JS -->
+      </div>
+      <div class="flights-footer" id="flightsFooter" hidden>
+        <span class="flights-last-updated" id="flightsLastUpdated"></span>
+        <button class="flights-refresh-btn" id="flightsRefreshBtn">↻ Refresh</button>
       </div>
     </div>
   </section>

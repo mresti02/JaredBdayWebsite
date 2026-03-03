@@ -544,8 +544,8 @@ async function fetchFlightData(flightNum, date) {
   if (cached && (Date.now() - cached.fetchedAt) < 5 * 60 * 1000) return cached.data;
 
   try {
-    const base = import.meta.env.BASE_URL; // e.g. /Jared30/
-    const resp = await fetch(`${base}api/flight-status?flight=${flightNum}&date=${date}`);
+    const base = import.meta.env.BASE_URL; // e.g. /Jared30
+    const resp = await fetch(`${base}/api/flight-status?flight=${flightNum}&date=${date}`);
     const text = await resp.text();
     let data;
     try {
